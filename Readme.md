@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов»
 
 * Студент: [Георгий Найфонов](https://up.htmlacademy.ru/react/7/user/1035371).
-* Наставник: `Неизвестно`.
+* Наставник: [Виктор Кан](https://htmlacademy.ru/profile/viktorkan).
 
 ---
 
