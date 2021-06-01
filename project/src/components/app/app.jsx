@@ -1,11 +1,19 @@
 import React from 'react';
+
 import Hero from '../hero/hero';
+import PropTypes from 'prop-types';
 
 
-function App() {
+function App(props) {
+  const {pointsAmount} = props;
+
   return (
-    <Hero/>
+    <Hero pointsAmount={pointsAmount}/>
   );
 }
+
+App.propTypes = {
+  pointsAmount: PropTypes.number.isRequired,
+};
 
 export default App;
