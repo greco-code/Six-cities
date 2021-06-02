@@ -1,15 +1,10 @@
 import React from 'react';
-import Point from '../point/point';
 import PropTypes from 'prop-types';
-
-
-const createPointsList = (amount) => new Array(amount).fill().map(((point) => <Point key={point}/>));
+import PointsList from '../pointsList/pointsList';
 
 
 function Hero(props) {
   const {pointsAmount} = props;
-
-  const pointsList = createPointsList(pointsAmount);
 
   return (
     <div className="page page--gray page--main">
@@ -99,7 +94,7 @@ function Hero(props) {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {pointsList}
+                <PointsList pointsAmount={pointsAmount}/>
               </div>
             </section>
             <div className="cities__right-section">
