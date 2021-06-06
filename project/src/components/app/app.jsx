@@ -4,10 +4,10 @@ import Hero from '../hero/hero';
 import PropTypes from 'prop-types';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import {AppRoute} from '../../const';
-import Login from '../pages/login/login';
-import Favorites from '../pages/favorites/favorites';
-import PointDescription from '../pages/point-description/point-description';
-import Error404 from '../pages/error404/error404';
+import LoginPage from '../pages/login-page/login-page';
+import FavoritesPage from '../pages/favorites-page/favorites-page';
+import PointInfoPage from '../pages/point-info-page/point-info-page';
+import ErrorPage from '../pages/error-page/error-page';
 
 
 function App(props) {
@@ -20,16 +20,16 @@ function App(props) {
           <Hero pointsAmount={pointsAmount}/>
         </Route>
         <Route exact path={AppRoute.LOGIN}>
-          <Login/>
+          <LoginPage/>
         </Route>
         <Route exact path={AppRoute.FAVORITES}>
-          <Favorites/>
+          <FavoritesPage/>
         </Route>
         <Route exact path={AppRoute.ROOM}>
-          <PointDescription/>
+          <PointInfoPage/>
         </Route>
         <Route>
-          <Error404/>
+          <ErrorPage/>
         </Route>
       </Switch>
     </BrowserRouter>

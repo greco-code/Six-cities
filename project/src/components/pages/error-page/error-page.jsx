@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-function Error404() {
+function ErrorPage() {
   return (
     <div id="notfound">
       <div className="notfound">
@@ -15,4 +15,4 @@ function Error404() {
   );
 }
 
-export default Error404;
+export default ErrorPage;

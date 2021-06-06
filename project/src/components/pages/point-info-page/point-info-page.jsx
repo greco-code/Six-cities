@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../../header/header';
 
-function PointDescription() {
+function PointInfoPage() {
   return (
     <div className="page">
       <Header/>
@@ -312,4 +312,4 @@ function PointDescription() {
   );
 }
 
-export default PointDescription;
+export default PointInfoPage;
