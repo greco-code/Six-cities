@@ -26,11 +26,11 @@ const firstOffer = {
     zoom: 8,
   },
   maxAdults: 4,
-  previewImage: 'img/1.png',
+  previewImage: 'img/apartment-01.jpg',
   price: 120,
   rating: 4.8,
   title: 'Beautiful & luxurious studio at great location',
-  type: 'apartment',
+  type: 'Apartment',
 };
 
 const secondOffer = {
@@ -61,11 +61,11 @@ const secondOffer = {
     zoom: 8,
   },
   maxAdults: 32,
-  previewImage: 'img/2.png',
+  previewImage: 'img/apartment-03.jpg',
   price: 100,
   rating: 4.9,
   title: 'Nice & luxurious studio at great location',
-  type: 'flat',
+  type: 'Flat',
 };
 
 const thirdOffer = {
@@ -96,11 +96,11 @@ const thirdOffer = {
     zoom: 8,
   },
   maxAdults: 5,
-  previewImage: 'img/1.png',
+  previewImage: 'img/apartment-02.jpg',
   price: 90,
   rating: 4.4,
   title: 'Awesome & luxurious studio at great location',
-  type: 'house',
+  type: 'House',
 };
 
 const fourthOffer = {
@@ -131,11 +131,11 @@ const fourthOffer = {
     zoom: 8,
   },
   maxAdults: 4,
-  previewImage: 'img/4.png',
+  previewImage: 'img/apartment-01.jpg',
   price: 150,
   rating: 50,
   title: 'Top top top',
-  type: 'apartment',
+  type: 'Apartment',
 };
 
 const offers = [firstOffer, secondOffer, thirdOffer, fourthOffer];

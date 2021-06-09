@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import PointsList from '../pointsList/pointsList';
 import Header from '../header/header';
+import pointProp from '../point/point.prop';
 
 
 function Hero(props) {
-  const {pointsAmount} = props;
+  const {pointsAmount, offers} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -69,7 +70,10 @@ function Hero(props) {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <PointsList pointsAmount={pointsAmount}/>
+                <PointsList
+                  pointsAmount={pointsAmount}
+                  offers={offers}
+                />
               </div>
             </section>
             <div className="cities__right-section">
@@ -84,6 +88,7 @@ function Hero(props) {
 
 Hero.propTypes = {
   pointsAmount: PropTypes.number.isRequired,
+  offers: PropTypes.arrayOf(pointProp).isRequired,
 };
 
 

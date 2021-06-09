@@ -11,5 +11,5 @@ export const LogoSettings = {
 };
 
 export const ListSettings = {
-  POINTS_AMOUNT: 5,
+  POINTS_AMOUNT: 4,
 };
