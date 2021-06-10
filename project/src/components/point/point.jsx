@@ -1,5 +1,5 @@
 import React from 'react';
-import pointProp from '../point/point.prop';
+import pointProp from '../app/offer.prop';
 
 function Point(props) {
   const {offer} = props;

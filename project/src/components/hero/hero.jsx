@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import PointsList from '../pointsList/pointsList';
 import Header from '../header/header';
-import pointProp from '../point/point.prop';
+import pointProp from '../app/offer.prop';
 
 
 function Hero(props) {

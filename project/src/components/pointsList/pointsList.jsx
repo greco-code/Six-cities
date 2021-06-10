@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Point from '../point/point';
-import pointProp from '../point/point.prop';
+import pointProp from '../app/offer.prop';
 
 function PointsList(props) {
   const {pointsAmount, offers} = props;

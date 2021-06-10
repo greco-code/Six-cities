@@ -8,7 +8,8 @@ import LoginPage from '../pages/login-page/login-page';
 import FavoritesPage from '../pages/favorites-page/favorites-page';
 import PointInfoPage from '../pages/point-info-page/point-info-page';
 import ErrorPage from '../pages/error-page/error-page';
-import pointProp from '../point/point.prop';
+import offerProp from './offer.prop';
+import commentProp from './comment.prop';
 
 
 function App(props) {
@@ -30,7 +31,10 @@ function App(props) {
           <FavoritesPage/>
         </Route>
         <Route exact path={AppRoute.ROOM}>
-          <PointInfoPage/>
+          <PointInfoPage
+            offer={offers[0]}
+            comments={comments}
+          />
         </Route>
         <Route>
           <ErrorPage/>
@@ -42,7 +46,8 @@ function App(props) {
 
 App.propTypes = {
   pointsAmount: PropTypes.number.isRequired,
-  offers: PropTypes.arrayOf(pointProp).isRequired,
+  offers: PropTypes.arrayOf(offerProp).isRequired,
+  comments: PropTypes.arrayOf(commentProp).isRequired,
 };
 
 export default App;

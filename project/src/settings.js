@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+
 export const LogoSettings = {
   HEADER: {
     width: 81,
@@ -13,3 +15,5 @@ export const LogoSettings = {
 export const ListSettings = {
   POINTS_AMOUNT: 4,
 };
+
+export const formatDate = (date) => dayjs(date).format('MMMM YYYY');
