@@ -18,7 +18,7 @@ const firstOffer = {
   },
   id: 1,
   images: ['img/1.png', 'img/2.png'],
-  isFavorite: false,
+  isFavorite: true,
   isPremium: false,
   location: {
     latitude: 52.35514938496378,
@@ -41,7 +41,7 @@ const secondOffer = {
       longitude: -2.349014,
       zoom: 10,
     },
-    name: 'Paris',
+    name: 'Amsterdam',
   },
   description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Paris.',
   goods: ['Heating', 'Kitchen', 'Cable TV', 'WiFi', 'Coffee machine', 'Dishwasher'],
@@ -53,7 +53,7 @@ const secondOffer = {
   },
   id: 2,
   images: ['img/2.png', 'img/4.png'],
-  isFavorite: false,
+  isFavorite: true,
   isPremium: true,
   location: {
     latitude: 48.86471609098,

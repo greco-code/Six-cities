@@ -28,7 +28,11 @@ function App(props) {
           <LoginPage/>
         </Route>
         <Route exact path={AppRoute.FAVORITES}>
-          <FavoritesPage/>
+          <FavoritesPage
+            favoriteOffers={
+              offers.filter((offer) => offer.isFavorite)
+            }
+          />
         </Route>
         <Route exact path={AppRoute.ROOM}>
           <PointInfoPage
