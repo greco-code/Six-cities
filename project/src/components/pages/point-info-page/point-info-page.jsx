@@ -3,7 +3,7 @@ import Header from '../../header/header';
 import PropTypes from 'prop-types';
 import offerProp from '../../app/offer.prop';
 import commentProp from '../../app/comment.prop';
-import {formatDate} from '../../../settings';
+import Comment from '../../comment/comment';
 
 function PointInfoPage(props) {
   const {offer, comments} = props;
@@ -100,31 +100,9 @@ function PointInfoPage(props) {
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{comments.length}</span></h2>
                 <ul className="reviews__list">
-                  {comments.map((comment, index) => (
-                    // eslint-disable-next-line react/no-array-index-key
-                    <li key={index} className="reviews__item">
-                      <div className="reviews__user user">
-                        <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                          <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width="54" height="54" alt="Reviews avatar"/>
-                        </div>
-                        <span className="reviews__user-name">
-                          {comment.user.name}
-                        </span>
-                      </div>
-                      <div className="reviews__info">
-                        <div className="reviews__rating rating">
-                          <div className="reviews__stars rating__stars">
-                            <span style={{width: (`${comment.rating * 20}%`)}}/>
-                            <span className="visually-hidden">Rating</span>
-                          </div>
-                        </div>
-                        <p className="reviews__text">
-                          {comment.comment}
-                        </p>
-                        <time className="reviews__time" dateTime="2019-04-24">{formatDate(comment.date)}</time>
-                      </div>
-                    </li>
-                  ))}
+                  {
+                    comments.map((comment) => <Comment key={comment.id} comment={comment}/>)
+                  }
                 </ul>
                 <form className="reviews__form form" action="#" method="post">
                   <label className="reviews__label form__label" htmlFor="review">Your review</label>
