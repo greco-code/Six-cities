@@ -17,7 +17,7 @@ const firstOffer = {
     name: 'Angelina',
   },
   id: 1,
-  images: ['img/1.png', 'img/2.png'],
+  images: ['img/amsterdam.jpg', 'img/amsterdam.jpg', 'img/amsterdam.jpg', 'img/amsterdam.jpg', 'img/amsterdam.jpg', 'img/amsterdam.jpg'],
   isFavorite: true,
   isPremium: false,
   location: {
@@ -52,7 +52,7 @@ const secondOffer = {
     name: 'Victor',
   },
   id: 2,
-  images: ['img/2.png', 'img/4.png'],
+  images: ['img/amsterdam.jpg', 'img/amsterdam.jpg', 'img/amsterdam.jpg', 'img/amsterdam.jpg', 'img/amsterdam.jpg', 'img/amsterdam.jpg'],
   isFavorite: true,
   isPremium: true,
   location: {
@@ -87,7 +87,7 @@ const thirdOffer = {
     name: 'Helix',
   },
   id: 3,
-  images: ['img/5.png', 'img/1.png'],
+  images: ['img/amsterdam.jpg', 'img/amsterdam.jpg', 'img/amsterdam.jpg', 'img/amsterdam.jpg', 'img/amsterdam.jpg', 'img/amsterdam.jpg'],
   isFavorite: true,
   isPremium: false,
   location: {
@@ -122,7 +122,7 @@ const fourthOffer = {
     name: 'Mike',
   },
   id: 4,
-  images: ['img/1.png', 'img/2.png'],
+  images: ['img/amsterdam.jpg', 'img/amsterdam.jpg', 'img/amsterdam.jpg', 'img/amsterdam.jpg', 'img/amsterdam.jpg', 'img/amsterdam.jpg'],
   isFavorite: false,
   isPremium: false,
   location: {
