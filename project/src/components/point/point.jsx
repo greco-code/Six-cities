@@ -1,11 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import pointProp from '../app/offer.prop';
 
 function Point(props) {
   const {offer} = props;
 
+  // eslint-disable-next-line no-unused-vars
+  const [hoveredOffer, setHoveredOffer] = useState([]);
+
   return (
-    <article className="cities__place-card place-card">
+    <article
+      className="cities__place-card place-card"
+      onMouseEnter={() => setHoveredOffer(offer)}
+    >
       {offer.isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
