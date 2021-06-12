@@ -1,9 +1,9 @@
 import React from 'react';
 import Header from '../../header/header';
 import Footer from '../../footer/footer';
-import FavoritesItemContainer from '../../favorites-item-container/favorites-item-container';
 import PropTypes from 'prop-types';
 import offerProp from '../../app/offer.prop';
+import FavoriteCitiesList from '../../favorite-cities-list/favorite-cities-list';
 
 function FavoritesPage(props) {
   const {favoriteOffers} = props;
@@ -16,11 +16,7 @@ function FavoritesPage(props) {
         <div className="page__favorites-container container">
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
-            <ul className="favorites__list">
-              {
-                cities.map((city) => <FavoritesItemContainer key={city} city={city} favoriteOffers={favoriteOffers.filter((offer) => offer.city.name === city)}/>)
-              }
-            </ul>
+            <FavoriteCitiesList offers={favoriteOffers} cities={cities}/>
           </section>
         </div>
       </main>

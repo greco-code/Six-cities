@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import PointsList from '../pointsList/pointsList';
-import Header from '../header/header';
-import pointProp from '../app/offer.prop';
+import PointsList from '../../points-list/points-list';
+import Header from '../../header/header';
+import pointProp from '../../app/offer.prop';
 
 
-function Hero(props) {
+function HeroPage(props) {
   const {pointsAmount, offers} = props;
 
   return (
@@ -86,10 +86,10 @@ function Hero(props) {
   );
 }
 
-Hero.propTypes = {
+HeroPage.propTypes = {
   pointsAmount: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(pointProp).isRequired,
 };
 
 
-export default Hero;
+export default HeroPage;

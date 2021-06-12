@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Hero from '../hero/hero';
+import HeroPage from '../pages/hero-page/hero-page';
 import PropTypes from 'prop-types';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import {AppRoute} from '../../const';
@@ -19,7 +19,7 @@ function App(props) {
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.MAIN}>
-          <Hero
+          <HeroPage
             pointsAmount={pointsAmount}
             offers={offers}
           />

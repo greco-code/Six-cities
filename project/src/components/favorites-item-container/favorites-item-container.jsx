@@ -1,7 +1,7 @@
 import React from 'react';
-import FavoriteItem from '../favorites-item/favorite-item';
 import PropTypes from 'prop-types';
 import offerProp from '../app/offer.prop';
+import FavoriteItemsList from '../favorite-items-list/favorite-items-list';
 
 function FavoritesItemContainer(props) {
   const {city, favoriteOffers} = props;
@@ -15,11 +15,7 @@ function FavoritesItemContainer(props) {
           </a>
         </div>
       </div>
-      <div className="favorites__places">
-        {
-          favoriteOffers.map((offer) => <FavoriteItem key={offer.id} offer={offer}/>)
-        }
-      </div>
+      <FavoriteItemsList offers={favoriteOffers}/>
     </li>
   );
 }
