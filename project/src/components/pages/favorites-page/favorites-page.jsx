@@ -2,8 +2,9 @@ import React from 'react';
 import Header from '../../header/header';
 import Footer from '../../footer/footer';
 import PropTypes from 'prop-types';
-import offerProp from '../../app/offer.prop';
+import offerProp from '../../../props/offer.prop';
 import FavoriteCitiesList from '../../favorite-cities-list/favorite-cities-list';
+import {PointTypeSettings} from '../../../settings';
 
 function FavoritesPage(props) {
   const {favoriteOffers} = props;
@@ -16,7 +17,7 @@ function FavoritesPage(props) {
         <div className="page__favorites-container container">
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
-            <FavoriteCitiesList offers={favoriteOffers} cities={cities}/>
+            <FavoriteCitiesList offers={favoriteOffers} cities={cities} type={PointTypeSettings.FAVORITES}/>
           </section>
         </div>
       </main>

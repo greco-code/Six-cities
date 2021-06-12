@@ -1,6 +1,6 @@
 import React from 'react';
 import {formatDate} from '../../settings';
-import commentProp from  '../app/comment.prop';
+import commentProp from '../../props/comment.prop';
 
 function Comment(props) {
   const {comment} = props;

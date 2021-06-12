@@ -1,15 +1,16 @@
 import React from 'react';
-import FavoriteItem from '../favorites-item/favorite-item';
 import PropTypes from 'prop-types';
-import offerProp from '../app/offer.prop';
+import offerProp from '../../props/offer.prop';
+import pointTypeProp from '../../props/pointType.prop';
+import Point from '../point/point';
 
 function FavoriteItemsList(props) {
-  const {offers} = props;
+  const {offers, type} = props;
 
   return (
     <div className="favorites__places">
       {
-        offers.map((offer) => <FavoriteItem key={offer.id} offer={offer}/>)
+        offers.map((offer) => <Point key={offer.id} offer={offer} type={type}/>)
       }
     </div>
   );
@@ -17,6 +18,7 @@ function FavoriteItemsList(props) {
 
 FavoriteItemsList.propTypes = {
   offers: PropTypes.arrayOf(offerProp).isRequired,
+  type: pointTypeProp,
 };
 
 export default FavoriteItemsList;

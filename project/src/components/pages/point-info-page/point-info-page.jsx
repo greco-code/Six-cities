@@ -1,8 +1,8 @@
 import React from 'react';
 import Header from '../../header/header';
 import PropTypes from 'prop-types';
-import offerProp from '../../app/offer.prop';
-import commentProp from '../../app/comment.prop';
+import offerProp from '../../../props/offer.prop';
+import commentProp from '../../../props/comment.prop';
 import Comment from '../../comment/comment';
 
 function PointInfoPage(props) {

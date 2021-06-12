@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import offerProp from '../app/offer.prop';
+import offerProp from '../../props/offer.prop';
+import pointTypeProp from '../../props/pointType.prop';
 import FavoriteItemsList from '../favorite-items-list/favorite-items-list';
 
-function FavoritesItemContainer(props) {
-  const {city, favoriteOffers} = props;
+function FavoritesCity(props) {
+  const {city, favoriteOffers, type} = props;
 
   return (
     <li className="favorites__locations-items">
@@ -15,14 +16,15 @@ function FavoritesItemContainer(props) {
           </a>
         </div>
       </div>
-      <FavoriteItemsList offers={favoriteOffers}/>
+      <FavoriteItemsList offers={favoriteOffers} type={type}/>
     </li>
   );
 }
 
-FavoritesItemContainer.propTypes = {
+FavoritesCity.propTypes = {
   city: PropTypes.string.isRequired,
   favoriteOffers: PropTypes.arrayOf(offerProp).isRequired,
+  type: pointTypeProp,
 };
 
-export default FavoritesItemContainer;
+export default FavoritesCity;

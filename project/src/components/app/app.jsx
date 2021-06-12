@@ -8,8 +8,8 @@ import LoginPage from '../pages/login-page/login-page';
 import FavoritesPage from '../pages/favorites-page/favorites-page';
 import PointInfoPage from '../pages/point-info-page/point-info-page';
 import ErrorPage from '../pages/error-page/error-page';
-import offerProp from './offer.prop';
-import commentProp from './comment.prop';
+import offerProp from '../../props/offer.prop';
+import commentProp from '../../props/comment.prop';
 
 
 function App(props) {

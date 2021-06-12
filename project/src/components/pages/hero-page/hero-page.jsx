@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import PointsList from '../../points-list/points-list';
 import Header from '../../header/header';
-import pointProp from '../../app/offer.prop';
+import pointProp from '../../../props/offer.prop';
+import {PointTypeSettings} from '../../../settings';
 
 
 function HeroPage(props) {
@@ -73,6 +74,7 @@ function HeroPage(props) {
                 <PointsList
                   pointsAmount={pointsAmount}
                   offers={offers}
+                  type={PointTypeSettings.MAIN}
                 />
               </div>
             </section>
