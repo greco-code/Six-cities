@@ -3,8 +3,13 @@ import Header from '../../header/header';
 import PropTypes from 'prop-types';
 import offerProp from '../../../props/offer.prop';
 import commentProp from '../../../props/comment.prop';
-import Comment from '../../comment/comment';
 import CommentForm from '../../comment-form/comment-form';
+import OfferImages from '../../offer-images/offer-images';
+import PremiumLabel from '../../premium-label/premium-label';
+import CommentsList from '../../comments-list/comments-list';
+import ProLabel from '../../pro-label/pro-label';
+import GoodsList from '../../goods-list/goods-list';
+import {CONVERT_TO_RATING} from '../../../const';
 
 function PointInfoPage(props) {
   const {offer, comments} = props;
@@ -17,22 +22,16 @@ function PointInfoPage(props) {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {
-                images && images.map((image, index) => (
-                  <div key={`${index + image}`} className="property__image-wrapper">
-                    <img className="property__image" src={image} alt="Photo studio"/>
-                  </div>
-                ))
-              }
+              <OfferImages
+                images={images}
+              />
             </div>
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              {isPremium && (
-                <div className="property__mark">
-                  <span>Premium</span>
-                </div>
-              )}
+              <PremiumLabel
+                isPremium={isPremium}
+              />
               <div className="property__name-wrapper">
                 <h1 className="property__name">
                   {title}
@@ -46,7 +45,7 @@ function PointInfoPage(props) {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{width: (`${rating * 20}%`)}}/>
+                  <span style={{width: (`${rating * CONVERT_TO_RATING}%`)}}/>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">{rating}</span>
@@ -69,12 +68,9 @@ function PointInfoPage(props) {
               <div className="property__inside">
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
-                  {goods.map((good, index) => (
-                    // eslint-disable-next-line react/no-array-index-key
-                    <li key={index} className="property__inside-item">
-                      {good}
-                    </li>
-                  ))}
+                  <GoodsList
+                    goods={goods}
+                  />
                 </ul>
               </div>
               <div className="property__host">
@@ -86,11 +82,9 @@ function PointInfoPage(props) {
                   <span className="property__user-name">
                     {host.name}
                   </span>
-                  {host.isPro && (
-                    <span className="property__user-status">
-                    Pro
-                    </span>
-                  )}
+                  <ProLabel
+                    isPro={host.isPro}
+                  />
                 </div>
                 <div className="property__description">
                   <p className="property__text">
@@ -100,11 +94,9 @@ function PointInfoPage(props) {
               </div>
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{comments.length}</span></h2>
-                <ul className="reviews__list">
-                  {
-                    comments.map((comment) => <Comment key={comment.id} comment={comment}/>)
-                  }
-                </ul>
+                <CommentsList
+                  comments={comments}
+                />
                 <CommentForm/>
               </section>
             </div>
@@ -200,7 +192,7 @@ function PointInfoPage(props) {
                   </div>
                   <div className="place-card__rating rating">
                     <div className="place-card__stars rating__stars">
-                      <span style={{width: (`${rating * 20}%`)}}/>
+                      <span style={{width: '80%'}}/>
                       <span className="visually-hidden">Rating</span>
                     </div>
                   </div>

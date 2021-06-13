@@ -1,6 +1,7 @@
 import React from 'react';
 import {formatDate} from '../../settings';
 import commentProp from '../../props/comment.prop';
+import {CONVERT_TO_RATING} from '../../const';
 
 function Comment(props) {
   const {comment} = props;
@@ -19,7 +20,7 @@ function Comment(props) {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{width: (`${rating * 20}%`)}}/>
+            <span style={{width: (`${rating * CONVERT_TO_RATING}%`)}}/>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
