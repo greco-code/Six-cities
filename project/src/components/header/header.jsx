@@ -1,5 +1,6 @@
 import React from 'react';
 import Logo from '../logo/logo';
+import {LogoSettings} from '../../settings';
 
 function Header() {
   return (
@@ -7,7 +8,7 @@ function Header() {
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <Logo/>
+            <Logo logoSettings={LogoSettings.HEADER}/>
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">
