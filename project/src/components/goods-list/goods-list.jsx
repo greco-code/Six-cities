@@ -5,12 +5,17 @@ function GoodsList(props) {
   const {goods} = props;
 
   return (
-    goods.map((good, index) => (
-      // eslint-disable-next-line react/no-array-index-key
-      <li key={index} className="property__inside-item">
-        {good}
-      </li>
-    ))
+    <div className="property__inside">
+      <h2 className="property__inside-title">What&apos;s inside</h2>
+      <ul className="property__inside-list">
+        {goods.map((good, index) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <li key={index} className="property__inside-item">
+            {good}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 

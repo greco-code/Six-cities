@@ -1,20 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-function ProLabel(props) {
-  const {isPro} = props;
+function ProLabel() {
 
   return (
-    isPro && (
-      <span className="property__user-status">
+    <span className="property__user-status">
         Pro
-      </span>
-    )
+    </span>
   );
 }
-
-ProLabel.propTypes = {
-  isPro: PropTypes.bool.isRequired,
-};
 
 export default ProLabel;

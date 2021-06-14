@@ -20,18 +20,16 @@ function PointInfoPage(props) {
       <Header/>
       <main className="page__main page__main--property">
         <section className="property">
-          <div className="property__gallery-container container">
-            <div className="property__gallery">
-              <OfferImages
-                images={images}
-              />
-            </div>
-          </div>
+          {
+            images &&
+            <OfferImages images={images}/>
+          }
           <div className="property__container container">
             <div className="property__wrapper">
-              <PremiumLabel
-                isPremium={isPremium}
-              />
+              {
+                isPremium &&
+                <PremiumLabel/>
+              }
               <div className="property__name-wrapper">
                 <h1 className="property__name">
                   {title}
@@ -65,14 +63,7 @@ function PointInfoPage(props) {
                 <b className="property__price-value">&euro;{price}</b>
                 <span className="property__price-text">&nbsp;night</span>
               </div>
-              <div className="property__inside">
-                <h2 className="property__inside-title">What&apos;s inside</h2>
-                <ul className="property__inside-list">
-                  <GoodsList
-                    goods={goods}
-                  />
-                </ul>
-              </div>
+              <GoodsList goods={goods}/>
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
@@ -82,9 +73,10 @@ function PointInfoPage(props) {
                   <span className="property__user-name">
                     {host.name}
                   </span>
-                  <ProLabel
-                    isPro={host.isPro}
-                  />
+                  {
+                    host.isPro &&
+                    <ProLabel/>
+                  }
                 </div>
                 <div className="property__description">
                   <p className="property__text">
