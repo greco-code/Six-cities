@@ -43,11 +43,10 @@ function Map(props) {
   }, [map, offers]);
 
   return (
-    <section
-      className="cities__map map"
+    <div
+      style={{height: '100%'}}
       ref={mapRef}
-    >
-    < /section>
+    />
   );
 }
 
