@@ -12,6 +12,7 @@ import GoodsList from '../../goods-list/goods-list';
 import {CONVERT_TO_RATING} from '../../../const';
 import PointsList from '../../points-list/points-list';
 import {PointTypeSettings} from '../../../settings';
+import Map from '../../map/map';
 
 const MAX_NEIGHBOURHOOD_OFFERS = 3;
 
@@ -97,7 +98,9 @@ function PointInfoPage(props) {
               </section>
             </div>
           </div>
-          <section className="property__map map"/>
+          <section className="property__map map">
+            <Map city={neighbourhoodOffers[0].city} offers={neighbourhoodOffers.slice(0, MAX_NEIGHBOURHOOD_OFFERS)}/>
+          </section>
         </section>
         <div className="container">
           <section className="near-places places">
