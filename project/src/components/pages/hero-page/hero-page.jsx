@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import PointsList from '../../points-list/points-list';
 import Header from '../../header/header';
-import pointProp from '../../../props/offer.prop';
+import offerProp from '../../../props/offer.prop';
 import {PointTypeSettings} from '../../../settings';
+import Map from '../../map/map';
 
 
 function HeroPage(props) {
@@ -79,7 +80,7 @@ function HeroPage(props) {
               </div>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"/>
+              <Map city={offers[0].city} offers={offers}/>
             </div>
           </div>
         </div>
@@ -90,7 +91,7 @@ function HeroPage(props) {
 
 HeroPage.propTypes = {
   pointsAmount: PropTypes.number.isRequired,
-  offers: PropTypes.arrayOf(pointProp).isRequired,
+  offers: PropTypes.arrayOf(offerProp).isRequired,
 };
 
 
