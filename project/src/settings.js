@@ -28,6 +28,11 @@ export const PointTypeSettings = {
     imageContainerClass: 'favorites__image-wrapper place-card__image-wrapper',
     infoContainerClass: 'favorites__card-info place-card__info',
   },
+
+  NEIGHBOURHOOD: {
+    articleClass: 'near-places__card place-card',
+    imageContainerClass: 'near-places__image-wrapper place-card__image-wrapper',
+  },
 };
 
 

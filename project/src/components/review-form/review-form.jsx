@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import StarsRating from '../stars-rating/stars-rating';
 
-function CommentForm() {
+function ReviewForm() {
   // eslint-disable-next-line no-unused-vars
   const [comment, setComment] = useState('');
 
@@ -31,4 +31,4 @@ function CommentForm() {
   );
 }
 
-export default CommentForm;
+export default ReviewForm;

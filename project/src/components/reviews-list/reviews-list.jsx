@@ -1,22 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Comment from '../comment/comment';
+import Review from '../review/review';
 import commentProps from '../../props/comment.prop';
 
-function CommentsList(props) {
+function ReviewsList(props) {
   const {comments} = props;
 
   return (
     <ul className="reviews__list">
       {
-        comments.map((comment) => <Comment key={comment.id} comment={comment}/>)
+        comments.map((comment) => <Review key={comment.id} comment={comment}/>)
       }
     </ul>
   );
 }
 
-CommentsList.propTypes = {
+ReviewsList.propTypes = {
   comments: PropTypes.arrayOf(commentProps).isRequired,
 };
 
-export default CommentsList;
+export default ReviewsList;
