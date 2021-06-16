@@ -80,7 +80,9 @@ function HeroPage(props) {
               </div>
             </section>
             <div className="cities__right-section">
-              <Map city={offers[0].city} offers={offers}/>
+              <section className="cities__map map">
+                <Map city={offers[0].city} offers={offers}/>
+              </section>
             </div>
           </div>
         </div>
