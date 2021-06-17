@@ -6,3 +6,4 @@ export const AppRoute = {
 };
 
 export const CONVERT_TO_RATING = 20;
+

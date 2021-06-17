@@ -2,8 +2,8 @@ const firstOffer = {
   bedrooms: 3,
   city: {
     location: {
-      latitude: 52.370216,
-      longitude: 4.895168,
+      latitude: 52.38333,
+      longitude: 4.9,
       zoom: 10,
     },
     name: 'Amsterdam',
@@ -21,8 +21,8 @@ const firstOffer = {
   isFavorite: true,
   isPremium: false,
   location: {
-    latitude: 52.35514938496378,
-    longitude: 4.673877537499948,
+    latitude: 52.3909553943508,
+    longitude: 4.85309666406198,
     zoom: 8,
   },
   maxAdults: 4,
@@ -37,8 +37,8 @@ const secondOffer = {
   bedrooms: 2,
   city: {
     location: {
-      latitude: 48.864716,
-      longitude: -2.349014,
+      latitude: 52.38333,
+      longitude: 4.9,
       zoom: 10,
     },
     name: 'Amsterdam',
@@ -56,8 +56,8 @@ const secondOffer = {
   isFavorite: true,
   isPremium: true,
   location: {
-    latitude: 48.86471609098,
-    longitude: 2.349014079098,
+    latitude: 52.369553943508,
+    longitude: 4.85309666406198,
     zoom: 8,
   },
   maxAdults: 32,
@@ -72,8 +72,8 @@ const thirdOffer = {
   bedrooms: 3,
   city: {
     location: {
-      latitude: 50.941357,
-      longitude: 6.958307,
+      latitude: 52.38333,
+      longitude: 4.9,
       zoom: 10,
     },
     name: 'Cologne',
@@ -91,8 +91,8 @@ const thirdOffer = {
   isFavorite: true,
   isPremium: false,
   location: {
-    latitude: 50.94135709496378,
-    longitude: 6.958307049998948,
+    latitude: 52.3909553943508,
+    longitude: 4.929309666406198,
     zoom: 8,
   },
   maxAdults: 5,
@@ -107,8 +107,8 @@ const fourthOffer = {
   bedrooms: 3,
   city: {
     location: {
-      latitude: 50.8505,
-      longitude: 4.3488,
+      latitude: 52.38333,
+      longitude: 4.9,
       zoom: 10,
     },
     name: 'Brussels',
@@ -126,8 +126,8 @@ const fourthOffer = {
   isFavorite: false,
   isPremium: false,
   location: {
-    latitude: 50.85056209406378,
-    longitude: 4.348809788496378,
+    latitude: 52.3809553943508,
+    longitude: 4.939309666406198,
     zoom: 8,
   },
   maxAdults: 4,
