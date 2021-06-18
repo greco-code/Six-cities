@@ -38,6 +38,7 @@ function App(props) {
           <PointInfoPage
             offer={offers[0]}
             comments={comments}
+            neighbourhoodOffers={offers}
           />
         </Route>
         <Route>

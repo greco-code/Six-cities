@@ -3,7 +3,7 @@ import {formatDate} from '../../settings';
 import commentProp from '../../props/comment.prop';
 import {CONVERT_TO_RATING} from '../../const';
 
-function Comment(props) {
+function Review(props) {
   const {comment} = props;
   const {user, rating, date} = comment;
 
@@ -33,8 +33,8 @@ function Comment(props) {
   );
 }
 
-Comment.propTypes = {
+Review.propTypes = {
   comment: commentProp,
 };
 
-export default Comment;
+export default Review;
