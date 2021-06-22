@@ -2,7 +2,7 @@ import React from 'react';
 
 import HeroPage from '../pages/hero-page/hero-page';
 import PropTypes from 'prop-types';
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import LoginPage from '../pages/login-page/login-page';
 import FavoritesPage from '../pages/favorites-page/favorites-page';
@@ -13,14 +13,13 @@ import commentProp from '../../props/comment.prop';
 
 
 function App(props) {
-  const {pointsAmount, offers, comments} = props;
+  const {offers, comments} = props;
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.MAIN}>
           <HeroPage
-            pointsAmount={pointsAmount}
             offers={offers}
           />
         </Route>
@@ -50,7 +49,6 @@ function App(props) {
 }
 
 App.propTypes = {
-  pointsAmount: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(offerProp).isRequired,
   comments: PropTypes.arrayOf(commentProp).isRequired,
 };

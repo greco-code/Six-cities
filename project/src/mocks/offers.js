@@ -41,7 +41,7 @@ const secondOffer = {
       longitude: 4.9,
       zoom: 10,
     },
-    name: 'Amsterdam',
+    name: 'Paris',
   },
   description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Paris.',
   goods: ['Heating', 'Kitchen', 'Cable TV', 'WiFi', 'Coffee machine', 'Dishwasher'],

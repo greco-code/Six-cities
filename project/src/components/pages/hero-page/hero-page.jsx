@@ -5,10 +5,21 @@ import Header from '../../header/header';
 import offerProp from '../../../props/offer.prop';
 import {PointTypeSettings} from '../../../settings';
 import Map from '../../map/map';
+import CitiesList from '../../citiesList/citiesList';
+import {CITIES} from '../../../const';
+import {connect} from 'react-redux';
+import {ActionCreator} from '../../../store/action';
+import {getOffersList, isPlural} from '../../../utils';
+import HeroEmptyPage from '../hero-empty-page/hero-empty-page';
 
 
 function HeroPage(props) {
-  const {pointsAmount, offers} = props;
+  const {offers, city, onCityChange} = props;
+  const offersByCity = getOffersList(offers, city);
+
+  if (!offersByCity.length) {
+    return <HeroEmptyPage cities={CITIES} currentCity={city} onCityChange={onCityChange}/>;
+  }
 
   return (
     <div className="page page--gray page--main">
@@ -17,45 +28,14 @@ function HeroPage(props) {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
+            <CitiesList cities={CITIES} onCityChange={onCityChange} currentCity={city}/>
           </section>
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">312 places to stay in Amsterdam</b>
+              <b className="places__found">{offersByCity.length} {isPlural(offersByCity.length, 'place')} to stay in {city}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex="0">
@@ -73,15 +53,14 @@ function HeroPage(props) {
               </form>
               <div className="cities__places-list places__list tabs__content">
                 <PointsList
-                  pointsAmount={pointsAmount}
-                  offers={offers}
+                  offers={offersByCity}
                   type={PointTypeSettings.MAIN}
                 />
               </div>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map city={offers[0].city} offers={offers}/>
+                <Map city={offersByCity[0].city} offers={offersByCity}/>
               </section>
             </div>
           </div>
@@ -91,10 +70,23 @@ function HeroPage(props) {
   );
 }
 
+const mapStateToProps = (state) => ({
+  city: state.city,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onCityChange(evt) {
+    dispatch(ActionCreator.changeCity(evt));
+  },
+});
+
+
 HeroPage.propTypes = {
-  pointsAmount: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(offerProp).isRequired,
+  city: PropTypes.string.isRequired,
+  onCityChange: PropTypes.func.isRequired,
 };
 
 
-export default HeroPage;
+export {HeroPage};
+export default connect(mapStateToProps, mapDispatchToProps)(HeroPage);

@@ -26,20 +26,28 @@ function Map(props) {
   const {city, offers} = props;
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
+  const markers = leaflet.layerGroup();
 
   useEffect(() => {
     if (map) {
+      markers.clearLayers();
       offers.forEach((offer) => {
-        leaflet
+        const marker = leaflet
           .marker({
             lat: offer.location.latitude,
             lng: offer.location.longitude,
           }, {
             icon: defaultCustomIcon,
-          })
-          .addTo(map);
+          });
+        markers.addLayer(marker);
       });
+      markers.addTo(map);
     }
+
+    return () => {
+      markers.clearLayers();
+    };
+
   }, [map, offers]);
 
   return (
