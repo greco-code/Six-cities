@@ -72,6 +72,7 @@ function HeroPage(props) {
 
 const mapStateToProps = (state) => ({
   city: state.city,
+  offers: state.offers,
 });
 
 const mapDispatchToProps = (dispatch) => ({

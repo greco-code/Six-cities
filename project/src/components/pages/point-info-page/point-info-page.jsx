@@ -13,6 +13,7 @@ import {CONVERT_TO_RATING} from '../../../const';
 import PointsList from '../../points-list/points-list';
 import {PointTypeSettings} from '../../../settings';
 import Map from '../../map/map';
+import {connect} from 'react-redux';
 
 const MAX_NEIGHBOURHOOD_OFFERS = 3;
 
@@ -125,4 +126,11 @@ PointInfoPage.propTypes = {
   neighbourhoodOffers: PropTypes.arrayOf(offerProp).isRequired,
 };
 
-export default PointInfoPage;
+const mapStateToProps = (state) => ({
+  offer: state.offers[0],
+  comments: state.comments,
+  neighbourhoodOffers: state.offers,
+});
+
+export {PointInfoPage};
+export default connect(mapStateToProps, null)(PointInfoPage);
