@@ -5,18 +5,17 @@ import pointProp from '../../props/offer.prop';
 import pointTypeProp from '../../props/pointType.prop';
 
 function PointsList(props) {
-  const {pointsAmount, offers, type} = props;
+  const {offers, type} = props;
 
   return (
     <div className="cities__places-list places__list tabs__content">
       {/* eslint-disable-next-line react/no-array-index-key */}
-      {new Array(pointsAmount).fill().map(((value, index) => <Point key={index} offer={offers[index]} type={type}/>))}
+      {offers.map(((value, index) => <Point key={index} offer={offers[index]} type={type}/>))}
     </div>
   );
 }
 
 PointsList.propTypes = {
-  pointsAmount: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(pointProp).isRequired,
   type: pointTypeProp,
 };
