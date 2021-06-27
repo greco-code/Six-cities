@@ -4,13 +4,13 @@ export const ActionType = {
 };
 
 export const ActionCreator = {
-  changeCity: (evt) => ({
+  changeCity: (payload) => ({
     type: ActionType.CHANGE_CITY,
-    payload: evt.target.textContent,
+    payload,
   }),
-  changeSort: (evt) => ({
+  changeSort: (payload) => ({
     type: ActionType.CHANGE_SORT,
-    payload: evt.target.textContent,
+    payload,
   }),
 };
 

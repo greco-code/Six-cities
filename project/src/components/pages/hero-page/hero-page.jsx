@@ -11,14 +11,16 @@ import {connect} from 'react-redux';
 import {ActionCreator} from '../../../store/action';
 import {getOffersList, isPlural} from '../../../utils';
 import HeroEmptyPage from '../hero-empty-page/hero-empty-page';
-import {SortForm} from '../../sort-form/sort-form';
+import SortForm from '../../sort-form/sort-form';
+import {sort} from '../../../sort';
 
 
 function HeroPage(props) {
-  const {offers, city, onCityChange} = props;
-  const offersByCity = getOffersList(offers, city);
+  const {offers, city, onCityChange, currentSortType} = props;
+  const offersByCity = offers && getOffersList(offers, city);
+  const sortedOffers = offersByCity && sort(currentSortType, offersByCity);
 
-  if (!offersByCity.length) {
+  if (!sortedOffers.length) {
     return <HeroEmptyPage cities={CITIES} currentCity={city} onCityChange={onCityChange}/>;
   }
 
@@ -36,18 +38,18 @@ function HeroPage(props) {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offersByCity.length} {isPlural(offersByCity.length, 'place')} to stay in {city}</b>
+              <b className="places__found">{sortedOffers.length} {isPlural(sortedOffers.length, 'place')} to stay in {city}</b>
               <SortForm/>
               <div className="cities__places-list places__list tabs__content">
                 <PointsList
-                  offers={offersByCity}
+                  offers={sortedOffers}
                   type={PointTypeSettings.MAIN}
                 />
               </div>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map city={offersByCity[0].city} offers={offersByCity}/>
+                <Map city={sortedOffers[0].city} offers={sortedOffers}/>
               </section>
             </div>
           </div>
@@ -60,11 +62,12 @@ function HeroPage(props) {
 const mapStateToProps = (state) => ({
   city: state.city,
   offers: state.offers,
+  currentSortType: state.sortType,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onCityChange(evt) {
-    dispatch(ActionCreator.changeCity(evt));
+    dispatch(ActionCreator.changeCity(evt.target.textContent));
   },
 });
 
@@ -73,6 +76,7 @@ HeroPage.propTypes = {
   offers: PropTypes.arrayOf(offerProp).isRequired,
   city: PropTypes.string.isRequired,
   onCityChange: PropTypes.func.isRequired,
+  currentSortType: PropTypes.string.isRequired,
 };
 
 

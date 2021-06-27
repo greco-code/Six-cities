@@ -6,7 +6,6 @@ import SortList from '../sort-list/sort-list';
 
 function SortForm(props) {
   const {sortType, onSortChange} = props;
-  console.log(sortType);
 
   return (
     <form className="places__sorting" action="#" method="get">
@@ -17,7 +16,7 @@ function SortForm(props) {
           <use xlinkHref="#icon-arrow-select"/>
         </svg>
       </span>
-      <SortList onSortChange={onSortChange}/>
+      <SortList onSortChange={onSortChange} currentSortType={sortType}/>
     </form>
   );
 }
@@ -26,13 +25,10 @@ const mapStateToProps = (state) => ({
   sortType: state.sortType,
 });
 
-// const mapStateToProps = (state) => {
-//   console.log(this.state);
-// };
 
 const mapDispatchToProps = (dispatch) => ({
-  onSortChange() {
-    dispatch(ActionCreator.changeSort());
+  onSortChange(evt) {
+    dispatch(ActionCreator.changeSort(evt.target.textContent));
   },
 });
 

@@ -10,7 +10,8 @@ function SortList(props) {
 
   return (
     <ul className="places__options places__options--custom places__options--opened">
-      {sortTypes.map((type) => <SortListItem key={type} sortType={type} onSortChange={onSortChange}/>)}
+      {sortTypes
+        .map((type) => <SortListItem key={type} sortType={type} onSortChange={onSortChange}/>)}
     </ul>
   );
 }

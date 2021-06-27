@@ -138,7 +138,42 @@ const fourthOffer = {
   type: 'Apartment',
 };
 
-const offers = [firstOffer, secondOffer, thirdOffer, fourthOffer];
+const fifthOffer = {
+  bedrooms: 3,
+  city: {
+    location: {
+      latitude: 52.38333,
+      longitude: 4.9,
+      zoom: 10,
+    },
+    name: 'Brussels',
+  },
+  description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Brussels.',
+  goods: ['Heating', 'Kitchen', 'Webstorm', 'Macbook', 'Coffee machine', 'Dishwasher'],
+  host: {
+    avatarUrl: 'img/1.png',
+    id: 4,
+    isPro: true,
+    name: 'Mike',
+  },
+  id: 5,
+  images: ['img/amsterdam.jpg', 'img/amsterdam.jpg', 'img/amsterdam.jpg', 'img/amsterdam.jpg', 'img/amsterdam.jpg', 'img/amsterdam.jpg'],
+  isFavorite: false,
+  isPremium: false,
+  location: {
+    latitude: 52.3809553943508,
+    longitude: 4.939309666406198,
+    zoom: 8,
+  },
+  maxAdults: 4,
+  previewImage: 'img/apartment-01.jpg',
+  price: 140,
+  rating: 50,
+  title: 'Top top top',
+  type: 'Apartment',
+};
+
+const offers = [firstOffer, secondOffer, thirdOffer, fourthOffer, fifthOffer];
 
 export {offers};
 
