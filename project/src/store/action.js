@@ -3,6 +3,7 @@ export const ActionType = {
   CHANGE_SORT: 'changeSort',
   SELECT_OFFER: 'selectOffer',
   UNSELECT_OFFER: 'unselectOffer',
+  TOGGLE_SORT: 'toggleSort',
 };
 
 export const ActionCreator = {
@@ -21,6 +22,10 @@ export const ActionCreator = {
   unselectOffer: () => ({
     type: ActionType.UNSELECT_OFFER,
     payload: null,
+  }),
+  toggleSort: (payload) => ({
+    type: ActionType.TOGGLE_SORT,
+    payload: !payload,
   }),
 };
 

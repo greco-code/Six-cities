@@ -9,6 +9,7 @@ const initialState = {
   comments,
   sortType: SortType.POPULAR,
   currentOffer: null,
+  isSortOpened: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -17,6 +18,8 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         city: action.payload,
+        isSortOpened: false,
+        sortType: SortType.POPULAR,
       };
     case ActionType.CHANGE_SORT:
       return {
@@ -32,6 +35,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         currentOffer: action.payload,
+      };
+    case ActionType.TOGGLE_SORT:
+      return {
+        ...state,
+        isSortOpened: action.payload,
       };
     default:
       return state;
