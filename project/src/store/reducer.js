@@ -8,6 +8,7 @@ const initialState = {
   offers,
   comments,
   sortType: SortType.POPULAR,
+  currentOffer: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -21,6 +22,16 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         sortType: action.payload,
+      };
+    case ActionType.SELECT_OFFER:
+      return {
+        ...state,
+        currentOffer: action.payload,
+      };
+    case ActionType.UNSELECT_OFFER:
+      return {
+        ...state,
+        currentOffer: action.payload,
       };
     default:
       return state;

@@ -4,6 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import PropTypes from 'prop-types';
 import offerProp from '../../props/offer.prop';
 import useMap from '../../hooks/useMap/useMap';
+import {connect} from 'react-redux';
 
 const URL_MARKER_DEFAULT = 'img/pin.svg';
 const URL_MARKER_CURRENT = 'img/pin-active.svg';
@@ -23,7 +24,7 @@ const currentCustomIcon = leaflet.icon({
 
 
 function Map(props) {
-  const {city, offers} = props;
+  const {city, offers, currentOffer} = props;
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
   const markers = leaflet.layerGroup();
@@ -37,7 +38,9 @@ function Map(props) {
             lat: offer.location.latitude,
             lng: offer.location.longitude,
           }, {
-            icon: defaultCustomIcon,
+            icon: (currentOffer && offer.id === currentOffer.id)
+              ? currentCustomIcon
+              : defaultCustomIcon,
           });
         markers.addLayer(marker);
       });
@@ -48,7 +51,7 @@ function Map(props) {
       markers.clearLayers();
     };
 
-  }, [map, offers]);
+  }, [map, offers, currentOffer]);
 
   return (
     <div
@@ -68,6 +71,12 @@ Map.propTypes = {
     }),
     name: PropTypes.string.isRequired,
   }),
+  currentOffer: offerProp,
 };
 
-export default Map;
+const mapStateToProps = (state) => ({
+  currentOffer: state.currentOffer,
+});
+
+export {Map};
+export default connect(mapStateToProps, null)(Map);

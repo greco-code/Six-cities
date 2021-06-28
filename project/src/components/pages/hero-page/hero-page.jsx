@@ -8,7 +8,6 @@ import Map from '../../map/map';
 import CitiesList from '../../citiesList/citiesList';
 import {CITIES} from '../../../const';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../../store/action';
 import {getOffersList, isPlural} from '../../../utils';
 import HeroEmptyPage from '../hero-empty-page/hero-empty-page';
 import SortForm from '../../sort-form/sort-form';
@@ -16,12 +15,12 @@ import {sort} from '../../../sort';
 
 
 function HeroPage(props) {
-  const {offers, city, onCityChange, currentSortType} = props;
+  const {offers, city, currentSortType} = props;
   const offersByCity = offers && getOffersList(offers, city);
   const sortedOffers = offersByCity && sort(currentSortType, offersByCity);
 
   if (!sortedOffers.length) {
-    return <HeroEmptyPage cities={CITIES} currentCity={city} onCityChange={onCityChange}/>;
+    return <HeroEmptyPage cities={CITIES} currentCity={city}/>;
   }
 
   return (
@@ -31,7 +30,7 @@ function HeroPage(props) {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <CitiesList cities={CITIES} onCityChange={onCityChange} currentCity={city}/>
+            <CitiesList cities={CITIES} currentCity={city}/>
           </section>
         </div>
         <div className="cities">
@@ -65,20 +64,13 @@ const mapStateToProps = (state) => ({
   currentSortType: state.sortType,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  onCityChange(evt) {
-    dispatch(ActionCreator.changeCity(evt.target.textContent));
-  },
-});
-
 
 HeroPage.propTypes = {
   offers: PropTypes.arrayOf(offerProp).isRequired,
   city: PropTypes.string.isRequired,
-  onCityChange: PropTypes.func.isRequired,
   currentSortType: PropTypes.string.isRequired,
 };
 
 
 export {HeroPage};
-export default connect(mapStateToProps, mapDispatchToProps)(HeroPage);
+export default connect(mapStateToProps, null)(HeroPage);
