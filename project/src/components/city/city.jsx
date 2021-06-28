@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cityProp from '../../props/city.prop';
+import {connect} from 'react-redux';
+import {ActionCreator} from '../../store/action';
 
 function City(props) {
   const {city, currentCity, onCityChange} = props;
@@ -20,4 +22,11 @@ City.propTypes = {
   onCityChange: PropTypes.func.isRequired,
 };
 
-export default City;
+const mapDispatchToProps = (dispatch) => ({
+  onCityChange(evt) {
+    dispatch(ActionCreator.changeCity(evt.target.textContent));
+  },
+});
+
+export {City};
+export default connect(null, mapDispatchToProps)(City);

@@ -3,6 +3,8 @@ import CitiesList from '../../citiesList/citiesList';
 import PropTypes from 'prop-types';
 import cityProp from '../../../props/city.prop';
 import Header from '../../header/header';
+import {ActionCreator} from '../../../store/action';
+import {connect} from 'react-redux';
 
 function HeroEmptyPage(props) {
   const {cities, currentCity, onCityChange} = props;
@@ -40,4 +42,11 @@ HeroEmptyPage.propTypes = {
   onCityChange: PropTypes.func.isRequired,
 };
 
-export default HeroEmptyPage;
+const mapDispatchToProps = (dispatch) => ({
+  onCityChange(evt) {
+    dispatch(ActionCreator.changeCity(evt.target.textContent));
+  },
+});
+
+export {HeroEmptyPage};
+export default connect(mapDispatchToProps, null)(HeroEmptyPage);

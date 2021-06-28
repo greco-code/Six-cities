@@ -1,11 +1,31 @@
 export const ActionType = {
   CHANGE_CITY: 'changeCity',
+  CHANGE_SORT: 'changeSort',
+  SELECT_OFFER: 'selectOffer',
+  UNSELECT_OFFER: 'unselectOffer',
+  TOGGLE_SORT: 'toggleSort',
 };
 
 export const ActionCreator = {
-  changeCity: (evt) => ({
+  changeCity: (payload) => ({
     type: ActionType.CHANGE_CITY,
-    payload: evt.target.textContent,
+    payload,
+  }),
+  changeSort: (payload) => ({
+    type: ActionType.CHANGE_SORT,
+    payload,
+  }),
+  selectOffer: (payload) => ({
+    type: ActionType.SELECT_OFFER,
+    payload,
+  }),
+  unselectOffer: () => ({
+    type: ActionType.UNSELECT_OFFER,
+    payload: null,
+  }),
+  toggleSort: (payload) => ({
+    type: ActionType.TOGGLE_SORT,
+    payload: !payload,
   }),
 };
 
