@@ -3,11 +3,9 @@ import CitiesList from '../../citiesList/citiesList';
 import PropTypes from 'prop-types';
 import cityProp from '../../../props/city.prop';
 import Header from '../../header/header';
-import {ActionCreator} from '../../../store/action';
-import {connect} from 'react-redux';
 
 function HeroEmptyPage(props) {
-  const {cities, currentCity, onCityChange} = props;
+  const {cities, currentCity} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -17,7 +15,7 @@ function HeroEmptyPage(props) {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <CitiesList cities={cities} onCityChange={onCityChange} currentCity={currentCity}/>
+            <CitiesList cities={cities} currentCity={currentCity}/>
           </section>
         </div>
         <div className="cities">
@@ -39,14 +37,6 @@ function HeroEmptyPage(props) {
 HeroEmptyPage.propTypes = {
   cities: PropTypes.arrayOf(cityProp).isRequired,
   currentCity: PropTypes.string.isRequired,
-  onCityChange: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  onCityChange(evt) {
-    dispatch(ActionCreator.changeCity(evt.target.textContent));
-  },
-});
-
-export {HeroEmptyPage};
-export default connect(mapDispatchToProps, null)(HeroEmptyPage);
+export default HeroEmptyPage;

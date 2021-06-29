@@ -8,26 +8,24 @@ import {ActionCreator} from '../../store/action';
 const sortTypes = Object.values(SortType);
 
 function SortList(props) {
-  const {onSortChange, isSortOpened} = props;
+  const {changeSort, isSortOpened} = props;
 
   return (
     <ul className={isSortOpened ? 'places__options places__options--custom places__options--opened' : 'places__options places__options--custom'}>
       {sortTypes
-        .map((type) => <SortListItem key={type} sortType={type} onSortChange={onSortChange}/>)}
+        .map((type) => <SortListItem key={type} sortType={type} changeSort={changeSort}/>)}
     </ul>
   );
 }
 
 SortList.propTypes = {
-  onSortChange: PropTypes.func.isRequired,
+  changeSort: PropTypes.func.isRequired,
   isSortOpened: PropTypes.bool.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  onSortChange(evt) {
-    dispatch(ActionCreator.changeSort(evt.target.textContent));
-  },
-});
+const mapDispatchToProps = {
+  changeSort: ActionCreator.changeSort,
+};
 
 const mapStateToProps = (state) => ({
   isSortOpened: state.isSortOpened,

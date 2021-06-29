@@ -9,14 +9,14 @@ import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/action';
 
 function Point(props) {
-  const {offer, type, onOfferHover, onOfferUnhover} = props;
+  const {offer, type, hoverOffer, unhoverOffer} = props;
   const {isPremium, isFavorite, rating, price, previewImage, id, title} = offer;
 
   return (
     <article
       className={type.articleClass}
-      onMouseEnter={() => onOfferHover(offer)}
-      onMouseLeave={onOfferUnhover}
+      onMouseEnter={() => hoverOffer(offer)}
+      onMouseLeave={unhoverOffer}
     >
       {isPremium && (
         <div className="place-card__mark">
@@ -54,18 +54,14 @@ function Point(props) {
 Point.propTypes = {
   offer: offerProp,
   type: pointTypeProp,
-  onOfferHover: PropTypes.func.isRequired,
-  onOfferUnhover: PropTypes.func.isRequired,
+  hoverOffer: PropTypes.func.isRequired,
+  unhoverOffer: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  onOfferHover(offer) {
-    dispatch(ActionCreator.selectOffer(offer));
-  },
-  onOfferUnhover() {
-    dispatch(ActionCreator.unselectOffer());
-  },
-});
+const mapDispatchToProps = {
+  hoverOffer: ActionCreator.selectOffer,
+  unhoverOffer: ActionCreator.unselectOffer,
+};
 
 export {Point};
 export default connect(null, mapDispatchToProps)(Point);

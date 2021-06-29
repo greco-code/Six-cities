@@ -4,11 +4,12 @@ import cityProp from '../../props/city.prop';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/action';
 
+
 function City(props) {
-  const {city, currentCity, onCityChange} = props;
+  const {city, currentCity, changeCity} = props;
 
   return (
-    <li className="locations__item" onClick={onCityChange}>
+    <li className="locations__item" onClick={(evt) => changeCity(evt.target.textContent)}>
       <a className={currentCity === city.city ? 'locations__item-link tabs__item tabs__item--active' : 'locations__item-link tabs__item'} href="#">
         <span>{city.city}</span>
       </a>
@@ -19,14 +20,12 @@ function City(props) {
 City.propTypes = {
   city: cityProp,
   currentCity: PropTypes.string.isRequired,
-  onCityChange: PropTypes.func.isRequired,
+  changeCity: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  onCityChange(evt) {
-    dispatch(ActionCreator.changeCity(evt.target.textContent));
-  },
-});
+const mapDispatchToProps = {
+  changeCity: ActionCreator.changeCity,
+};
 
 export {City};
 export default connect(null, mapDispatchToProps)(City);

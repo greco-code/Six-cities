@@ -7,25 +7,25 @@ export const ActionType = {
 };
 
 export const ActionCreator = {
-  changeCity: (payload) => ({
+  changeCity: (city) => ({
     type: ActionType.CHANGE_CITY,
-    payload,
+    payload: city,
   }),
-  changeSort: (payload) => ({
+  changeSort: (sort) => ({
     type: ActionType.CHANGE_SORT,
-    payload,
+    payload: sort,
   }),
-  selectOffer: (payload) => ({
+  selectOffer: (offer) => ({
     type: ActionType.SELECT_OFFER,
-    payload,
+    payload: offer,
   }),
   unselectOffer: () => ({
     type: ActionType.UNSELECT_OFFER,
     payload: null,
   }),
-  toggleSort: (payload) => ({
+  toggleSort: (bool) => ({
     type: ActionType.TOGGLE_SORT,
-    payload: !payload,
+    payload: !bool,
   }),
 };
 
