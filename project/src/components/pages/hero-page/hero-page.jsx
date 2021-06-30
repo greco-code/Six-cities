@@ -15,7 +15,7 @@ import {sort} from '../../../sort';
 
 
 function HeroPage(props) {
-  const {offers, city, currentSortType} = props;
+  const {offers, city, currentSortType, currentOffer} = props;
   const offersByCity = offers && getOffersList(offers, city);
   const sortedOffers = offersByCity && sort(currentSortType, offersByCity);
 
@@ -48,7 +48,7 @@ function HeroPage(props) {
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map city={sortedOffers[0].city} offers={sortedOffers}/>
+                <Map city={sortedOffers[0].city} offers={sortedOffers} currentOffer={currentOffer}/>
               </section>
             </div>
           </div>
@@ -62,6 +62,7 @@ const mapStateToProps = (state) => ({
   city: state.city,
   offers: state.offers,
   currentSortType: state.sortType,
+  currentOffer: state.currentOffer,
 });
 
 
@@ -69,6 +70,7 @@ HeroPage.propTypes = {
   offers: PropTypes.arrayOf(offerProp).isRequired,
   city: PropTypes.string.isRequired,
   currentSortType: PropTypes.string.isRequired,
+  currentOffer: offerProp,
 };
 
 

@@ -4,7 +4,6 @@ import 'leaflet/dist/leaflet.css';
 import PropTypes from 'prop-types';
 import offerProp from '../../props/offer.prop';
 import useMap from '../../hooks/useMap/useMap';
-import {connect} from 'react-redux';
 
 const URL_MARKER_DEFAULT = 'img/pin.svg';
 const URL_MARKER_CURRENT = 'img/pin-active.svg';
@@ -74,9 +73,4 @@ Map.propTypes = {
   currentOffer: offerProp,
 };
 
-const mapStateToProps = (state) => ({
-  currentOffer: state.currentOffer,
-});
-
-export {Map};
-export default connect(mapStateToProps, null)(Map);
+export default Map;
