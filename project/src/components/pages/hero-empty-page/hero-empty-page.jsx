@@ -5,7 +5,7 @@ import cityProp from '../../../props/city.prop';
 import Header from '../../header/header';
 
 function HeroEmptyPage(props) {
-  const {cities, currentCity, onCityChange} = props;
+  const {cities, currentCity} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -15,7 +15,7 @@ function HeroEmptyPage(props) {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <CitiesList cities={cities} onCityChange={onCityChange} currentCity={currentCity}/>
+            <CitiesList cities={cities} currentCity={currentCity}/>
           </section>
         </div>
         <div className="cities">
@@ -37,7 +37,6 @@ function HeroEmptyPage(props) {
 HeroEmptyPage.propTypes = {
   cities: PropTypes.arrayOf(cityProp).isRequired,
   currentCity: PropTypes.string.isRequired,
-  onCityChange: PropTypes.func.isRequired,
 };
 
 export default HeroEmptyPage;

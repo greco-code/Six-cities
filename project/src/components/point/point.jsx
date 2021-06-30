@@ -1,21 +1,22 @@
-import React, {useState} from 'react';
+import React from 'react';
 import offerProp from '../../props/offer.prop';
 import pointTypeProp from '../../props/pointType.prop';
 import BookmarkButton from '../bookmark-button/bookmark-button';
 import {generatePath, Link} from 'react-router-dom';
 import {AppRoute, CONVERT_TO_RATING} from '../../const';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {ActionCreator} from '../../store/action';
 
 function Point(props) {
-  const {offer, type} = props;
+  const {offer, type, hoverOffer, unhoverOffer} = props;
   const {isPremium, isFavorite, rating, price, previewImage, id, title} = offer;
-
-  // eslint-disable-next-line no-unused-vars
-  const [hoveredOffer, setHoveredOffer] = useState([]);
 
   return (
     <article
       className={type.articleClass}
-      onMouseEnter={() => setHoveredOffer(offer)}
+      onMouseEnter={() => hoverOffer(offer)}
+      onMouseLeave={unhoverOffer}
     >
       {isPremium && (
         <div className="place-card__mark">
@@ -53,6 +54,14 @@ function Point(props) {
 Point.propTypes = {
   offer: offerProp,
   type: pointTypeProp,
+  hoverOffer: PropTypes.func.isRequired,
+  unhoverOffer: PropTypes.func.isRequired,
 };
 
-export default Point;
+const mapDispatchToProps = {
+  hoverOffer: ActionCreator.selectOffer,
+  unhoverOffer: ActionCreator.unselectOffer,
+};
+
+export {Point};
+export default connect(null, mapDispatchToProps)(Point);

@@ -8,17 +8,19 @@ import Map from '../../map/map';
 import CitiesList from '../../citiesList/citiesList';
 import {CITIES} from '../../../const';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../../store/action';
 import {getOffersList, isPlural} from '../../../utils';
 import HeroEmptyPage from '../hero-empty-page/hero-empty-page';
+import SortForm from '../../sort-form/sort-form';
+import {sort} from '../../../sort';
 
 
 function HeroPage(props) {
-  const {offers, city, onCityChange} = props;
-  const offersByCity = getOffersList(offers, city);
+  const {offers, city, currentSortType, currentOffer} = props;
+  const offersByCity = offers && getOffersList(offers, city);
+  const sortedOffers = offersByCity && sort(currentSortType, offersByCity);
 
-  if (!offersByCity.length) {
-    return <HeroEmptyPage cities={CITIES} currentCity={city} onCityChange={onCityChange}/>;
+  if (!sortedOffers.length) {
+    return <HeroEmptyPage cities={CITIES} currentCity={city}/>;
   }
 
   return (
@@ -28,39 +30,25 @@ function HeroPage(props) {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <CitiesList cities={CITIES} onCityChange={onCityChange} currentCity={city}/>
+            <CitiesList cities={CITIES} currentCity={city}/>
           </section>
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offersByCity.length} {isPlural(offersByCity.length, 'place')} to stay in {city}</b>
-              <form className="places__sorting" action="#" method="get">
-                <span className="places__sorting-caption">Sort by</span>
-                <span className="places__sorting-type" tabIndex="0">
-                  Popular
-                  <svg className="places__sorting-arrow" width="7" height="4">
-                    <use xlinkHref="#icon-arrow-select"/>
-                  </svg>
-                </span>
-                <ul className="places__options places__options--custom places__options--opened">
-                  <li className="places__option places__option--active" tabIndex="0">Popular</li>
-                  <li className="places__option" tabIndex="0">Price: low to high</li>
-                  <li className="places__option" tabIndex="0">Price: high to low</li>
-                  <li className="places__option" tabIndex="0">Top rated first</li>
-                </ul>
-              </form>
+              <b className="places__found">{sortedOffers.length} {isPlural(sortedOffers.length, 'place')} to stay in {city}</b>
+              <SortForm/>
               <div className="cities__places-list places__list tabs__content">
                 <PointsList
-                  offers={offersByCity}
+                  offers={sortedOffers}
                   type={PointTypeSettings.MAIN}
                 />
               </div>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map city={offersByCity[0].city} offers={offersByCity}/>
+                <Map city={sortedOffers[0].city} offers={sortedOffers} currentOffer={currentOffer}/>
               </section>
             </div>
           </div>
@@ -73,21 +61,18 @@ function HeroPage(props) {
 const mapStateToProps = (state) => ({
   city: state.city,
   offers: state.offers,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onCityChange(evt) {
-    dispatch(ActionCreator.changeCity(evt));
-  },
+  currentSortType: state.sortType,
+  currentOffer: state.currentOffer,
 });
 
 
 HeroPage.propTypes = {
   offers: PropTypes.arrayOf(offerProp).isRequired,
   city: PropTypes.string.isRequired,
-  onCityChange: PropTypes.func.isRequired,
+  currentSortType: PropTypes.string.isRequired,
+  currentOffer: offerProp,
 };
 
 
 export {HeroPage};
-export default connect(mapStateToProps, mapDispatchToProps)(HeroPage);
+export default connect(mapStateToProps, null)(HeroPage);
