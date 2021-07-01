@@ -1,15 +1,16 @@
-import {offers} from '../mocks/offers';
 import {ActionType} from './action';
+import {AuthorizationStatus, SortType} from '../const';
 import {comments} from '../mocks/comments';
-import {SortType} from '../const';
 
 const initialState = {
   city: 'Paris',
-  offers,
-  comments,
+  offers: [],
+  comments: comments,
   sortType: SortType.POPULAR,
   currentOffer: null,
   isSortOpened: false,
+  authorizationStatus: AuthorizationStatus.UNKNOWN,
+  isDataLoaded: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -40,6 +41,27 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isSortOpened: action.payload,
+      };
+    case ActionType.LOAD_OFFERS:
+      return {
+        ...state,
+        offers: action.payload,
+        isDataLoaded: true,
+      };
+    case ActionType.LOAD_COMMENTS:
+      return {
+        ...state,
+        offers: action.payload,
+      };
+    case ActionType.REQUIRE_AUTHORIZATION:
+      return {
+        ...state,
+        authorizationStatus: action.payload,
+      };
+    case ActionType.LOGOUT:
+      return {
+        ...state,
+        authorizationStatus: AuthorizationStatus.NO_AUTH,
       };
     default:
       return state;
