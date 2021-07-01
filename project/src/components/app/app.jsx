@@ -7,9 +7,20 @@ import LoginPage from '../pages/login-page/login-page';
 import FavoritesPage from '../pages/favorites-page/favorites-page';
 import PointInfoPage from '../pages/point-info-page/point-info-page';
 import ErrorPage from '../pages/error-page/error-page';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+import Spinner from '../spinner/spinner';
+import {isCheckedAuth} from '../../utils';
 
 
-function App() {
+function App(props) {
+  const {isDataLoaded, authorizationStatus} = props;
+
+  if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
+    return (
+      <Spinner/>
+    );
+  }
 
   return (
     <BrowserRouter>
@@ -34,5 +45,16 @@ function App() {
   );
 }
 
+const mapStateToProps = (state) => ({
+  isDataLoaded: state.isDataLoaded,
+  authorizationStatus: state.authorizationStatus,
+});
 
-export default App;
+App.propTypes = {
+  isDataLoaded: PropTypes.bool.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
+};
+
+
+export {App};
+export default connect(mapStateToProps)(App);
