@@ -53,3 +53,32 @@ export const APIRoute = {
   LOGIN: '/login',
   LOGOUT: '/logout',
 };
+
+export const COORDINATES = {
+  'Paris': {
+    LAT: 48.85661,
+    LNG: 2.351499,
+  },
+  'Cologne': {
+    LAT: 50.938361,
+    LNG: 6.959974,
+  },
+  'Brussels': {
+    LAT: 50.846557,
+    LNG: 4.351697,
+  },
+  'Amsterdam': {
+    LAT: 52.37454,
+    LNG: 4.897976,
+  },
+  'Hamburg': {
+    LAT: 53.550341,
+    LNG: 10.000654,
+  },
+  'Dusseldorf': {
+    LAT: 51.225402,
+    LNG: 6.776314,
+  },
+
+};
+export const ZOOM = 13;
