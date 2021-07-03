@@ -8,6 +8,7 @@ export const ActionType = {
   LOAD_COMMENTS: 'loadComments',
   REQUIRE_AUTHORIZATION: 'requireAuthorization',
   LOGOUT: 'logout',
+  CHANGE_OFFERS_LOADING_STATUS: 'changeOffersLoadingStatus',
 };
 
 export const ActionCreator = {
@@ -42,6 +43,10 @@ export const ActionCreator = {
   requireAuthorization: (status) => ({
     type: ActionType.REQUIRE_AUTHORIZATION,
     payload: status,
+  }),
+  changeOffersLoadingStatus: (status) => ({
+    type: ActionType.CHANGE_OFFERS_LOADING_STATUS,
+    payload: !status,
   }),
   logout: () => ({
     type: ActionType.LOGOUT,

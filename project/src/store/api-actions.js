@@ -5,6 +5,7 @@ import {adaptOfferToClient} from '../adapters';
 export const fetchOffers = () => (dispatch, _getState, api) => (
   api.get(APIRoute.OFFERS)
     .then(({data}) => dispatch(ActionCreator.loadOffers(data.map((offer) => adaptOfferToClient(offer)))))
+    .then(() => dispatch(ActionCreator.changeOffersLoadingStatus()))
 );
 
 export const fetchComments = () => (dispatch, _getState, api) => (

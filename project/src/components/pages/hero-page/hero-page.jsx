@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import PointsList from '../../points-list/points-list';
 import Header from '../../header/header';
@@ -7,19 +7,29 @@ import {PointTypeSettings} from '../../../settings';
 import Map from '../../map/map';
 import CitiesList from '../../citiesList/citiesList';
 import {CITIES} from '../../../const';
-import {connect} from 'react-redux';
+import {connect, useDispatch} from 'react-redux';
 import {getOffersList, isPlural} from '../../../utils';
 import HeroEmptyPage from '../hero-empty-page/hero-empty-page';
 import SortForm from '../../sort-form/sort-form';
 import {sort} from '../../../sort';
+import {fetchOffers} from '../../../store/api-actions';
+import LoadWrapper from '../../load-wrapper/load-wrapper';
 
 
 function HeroPage(props) {
-  const {offers, city, currentSortType, currentOffer} = props;
+  const {offers, city, currentSortType, currentOffer, isOffersLoaded} = props;
   const offersByCity = offers && getOffersList(offers, city);
   const sortedOffers = offersByCity && sort(currentSortType, offersByCity);
 
-  if (!sortedOffers.length) {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchOffers());
+  }, [dispatch]);
+
+
+  if (!sortedOffers.length && isOffersLoaded) {
     return <HeroEmptyPage cities={CITIES} currentCity={city}/>;
   }
 
@@ -40,15 +50,19 @@ function HeroPage(props) {
               <b className="places__found">{sortedOffers.length} {isPlural(sortedOffers.length, 'place')} to stay in {city}</b>
               <SortForm/>
               <div className="cities__places-list places__list tabs__content">
-                <PointsList
-                  offers={sortedOffers}
-                  type={PointTypeSettings.MAIN}
-                />
+                <LoadWrapper isDataLoaded={isOffersLoaded}>
+                  <PointsList
+                    offers={sortedOffers}
+                    type={PointTypeSettings.MAIN}
+                  />
+                </LoadWrapper>
               </div>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map city={sortedOffers[0].city} offers={sortedOffers} currentOffer={currentOffer}/>
+                <LoadWrapper isDataLoaded={isOffersLoaded} isEmpty>
+                  <Map city={city} offers={sortedOffers} currentOffer={currentOffer}/>
+                </LoadWrapper>
               </section>
             </div>
           </div>
@@ -58,21 +72,23 @@ function HeroPage(props) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  city: state.city,
-  offers: state.offers,
-  currentSortType: state.sortType,
-  currentOffer: state.currentOffer,
-});
-
 
 HeroPage.propTypes = {
   offers: PropTypes.arrayOf(offerProp).isRequired,
   city: PropTypes.string.isRequired,
   currentSortType: PropTypes.string.isRequired,
   currentOffer: offerProp,
+  isOffersLoaded: PropTypes.bool.isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  city: state.city,
+  offers: state.offers,
+  currentSortType: state.sortType,
+  currentOffer: state.currentOffer,
+  isOffersLoaded: state.isOffersLoaded,
+});
 
 
 export {HeroPage};
-export default connect(mapStateToProps, null)(HeroPage);
+export default connect(mapStateToProps)(HeroPage);

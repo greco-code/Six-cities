@@ -10,7 +10,7 @@ const initialState = {
   currentOffer: null,
   isSortOpened: false,
   authorizationStatus: AuthorizationStatus.UNKNOWN,
-  isDataLoaded: false,
+  isOffersLoaded: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -46,7 +46,6 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         offers: action.payload,
-        isDataLoaded: true,
       };
     case ActionType.LOAD_COMMENTS:
       return {
@@ -62,6 +61,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         authorizationStatus: AuthorizationStatus.NO_AUTH,
+      };
+    case ActionType.CHANGE_OFFERS_LOADING_STATUS:
+      return {
+        ...state,
+        isOffersLoaded: action.payload,
       };
     default:
       return state;

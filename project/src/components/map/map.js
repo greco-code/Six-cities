@@ -62,14 +62,7 @@ function Map(props) {
 
 Map.propTypes = {
   offers: PropTypes.arrayOf(offerProp).isRequired,
-  city: PropTypes.shape({
-    location: PropTypes.shape({
-      latitude: PropTypes.number.isRequired,
-      longitude: PropTypes.number.isRequired,
-      zoom: PropTypes.number.isRequired,
-    }),
-    name: PropTypes.string.isRequired,
-  }),
+  city: PropTypes.string.isRequired,
   currentOffer: offerProp,
 };
 
