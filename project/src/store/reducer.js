@@ -11,6 +11,7 @@ const initialState = {
   isSortOpened: false,
   authorizationStatus: AuthorizationStatus.UNKNOWN,
   isOffersLoaded: false,
+  login: '',
 };
 
 const reducer = (state = initialState, action) => {
@@ -67,6 +68,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         isOffersLoaded: action.payload,
       };
+    case ActionType.SAVE_LOGIN: {
+      return {
+        ...state,
+        login: action.payload,
+      };
+    }
     default:
       return state;
   }

@@ -9,6 +9,7 @@ export const ActionType = {
   REQUIRE_AUTHORIZATION: 'requireAuthorization',
   LOGOUT: 'logout',
   CHANGE_OFFERS_LOADING_STATUS: 'changeOffersLoadingStatus',
+  SAVE_LOGIN: 'saveLogin',
 };
 
 export const ActionCreator = {
@@ -47,6 +48,10 @@ export const ActionCreator = {
   changeOffersLoadingStatus: (status) => ({
     type: ActionType.CHANGE_OFFERS_LOADING_STATUS,
     payload: !status,
+  }),
+  saveLogin: (login) => ({
+    type: ActionType.SAVE_LOGIN,
+    payload: login,
   }),
   logout: () => ({
     type: ActionType.LOGOUT,
