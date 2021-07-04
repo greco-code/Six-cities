@@ -3,6 +3,7 @@ import Header from '../../header/header';
 import PropTypes from 'prop-types';
 import offerProp from '../../../props/offer.prop';
 import commentProp from '../../../props/comment.prop';
+import PropTypes from 'prop-types';
 import ReviewForm from '../../review-form/review-form';
 import OfferImages from '../../offer-images/offer-images';
 import PremiumLabel from '../../premium-label/premium-label';

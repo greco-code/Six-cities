@@ -4,6 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import PropTypes from 'prop-types';
 import offerProp from '../../props/offer.prop';
 import useMap from '../../hooks/useMap/useMap';
+import {COORDINATES, ZOOM} from '../../const';
 
 const URL_MARKER_DEFAULT = 'img/pin.svg';
 const URL_MARKER_CURRENT = 'img/pin-active.svg';
@@ -30,6 +31,8 @@ function Map(props) {
 
   useEffect(() => {
     if (map) {
+      map.flyTo(leaflet.latLng(COORDINATES[city].LAT, COORDINATES[city].LNG), ZOOM);
+
       markers.clearLayers();
       offers.forEach((offer) => {
         const marker = leaflet
@@ -62,14 +65,7 @@ function Map(props) {
 
 Map.propTypes = {
   offers: PropTypes.arrayOf(offerProp).isRequired,
-  city: PropTypes.shape({
-    location: PropTypes.shape({
-      latitude: PropTypes.number.isRequired,
-      longitude: PropTypes.number.isRequired,
-      zoom: PropTypes.number.isRequired,
-    }),
-    name: PropTypes.string.isRequired,
-  }),
+  city: PropTypes.string.isRequired,
   currentOffer: offerProp,
 };
 
