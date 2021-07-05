@@ -11,6 +11,7 @@ export const ActionType = {
   CHANGE_OFFERS_LOADING_STATUS: 'changeOffersLoadingStatus',
   SAVE_LOGIN: 'saveLogin',
   REMOVE_LOGIN: 'removeLogin',
+  REDIRECT: 'redirect',
 };
 
 export const ActionCreator = {
@@ -60,6 +61,10 @@ export const ActionCreator = {
   removeLogin: () => ({
     type: ActionType.REMOVE_LOGIN,
     payload: '',
+  }),
+  redirect: (url) => ({
+    type: ActionType.REDIRECT,
+    payload: url,
   }),
 };
 
