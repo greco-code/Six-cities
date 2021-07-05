@@ -1,7 +1,7 @@
 import React from 'react';
 import Logo from '../logo/logo';
 import {LogoSettings} from '../../settings';
-import AuthLink from '../auth-link/auth-link';
+import AuthLink from '../auth-links/auth-links';
 
 function Header() {
 

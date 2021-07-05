@@ -10,6 +10,7 @@ export const ActionType = {
   LOGOUT: 'logout',
   CHANGE_OFFERS_LOADING_STATUS: 'changeOffersLoadingStatus',
   SAVE_LOGIN: 'saveLogin',
+  REMOVE_LOGIN: 'removeLogin',
 };
 
 export const ActionCreator = {
@@ -55,6 +56,10 @@ export const ActionCreator = {
   }),
   logout: () => ({
     type: ActionType.LOGOUT,
+  }),
+  removeLogin: () => ({
+    type: ActionType.REMOVE_LOGIN,
+    payload: '',
   }),
 };
 

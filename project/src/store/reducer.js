@@ -74,6 +74,12 @@ const reducer = (state = initialState, action) => {
         login: action.payload,
       };
     }
+    case ActionType.REMOVE_LOGIN: {
+      return {
+        ...state,
+        login: action.payload,
+      };
+    }
     default:
       return state;
   }

@@ -6,7 +6,7 @@ import {AppRoute} from '../../const';
 import FavoritesPage from '../pages/favorites-page/favorites-page';
 import PointInfoPage from '../pages/point-info-page/point-info-page';
 import ErrorPage from '../pages/error-page/error-page';
-import {PrivateRoute} from '../private-route/private-route';
+import PrivateRoute from '../private-route/private-route';
 import AuthScreen from '../pages/auth-page/auth-page';
 
 

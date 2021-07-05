@@ -38,4 +38,4 @@ const mapStateToProps = (state) => ({
 
 
 export {FavoritesPage};
-export default connect(mapStateToProps, null)(FavoritesPage);
+export default connect(mapStateToProps)(FavoritesPage);
