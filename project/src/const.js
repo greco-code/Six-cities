@@ -1,6 +1,6 @@
 export const AppRoute = {
   MAIN: '/',
-  LOGIN: '/login-page',
+  LOGIN: '/login',
   FAVORITES: '/favorites-page',
   ROOM: '/offer/:id',
 };

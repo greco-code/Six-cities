@@ -1,8 +1,10 @@
 import React from 'react';
 import Logo from '../logo/logo';
 import {LogoSettings} from '../../settings';
+import AuthLink from '../auth-links/auth-links';
 
 function Header() {
+
   return (
     <header className="header">
       <div className="container">
@@ -11,15 +13,7 @@ function Header() {
             <Logo logoSettings={LogoSettings.HEADER}/>
           </div>
           <nav className="header__nav">
-            <ul className="header__nav-list">
-              <li className="header__nav-item user">
-                <a className="header__nav-link header__nav-link--profile" href="#">
-                  <div className="header__avatar-wrapper user__avatar-wrapper">
-                  </div>
-                  <span className="header__login">Sign in</span>
-                </a>
-              </li>
-            </ul>
+            <AuthLink/>
           </nav>
         </div>
       </div>
