@@ -9,9 +9,12 @@ export const ActionType = {
   REQUIRE_AUTHORIZATION: 'requireAuthorization',
   LOGOUT: 'logout',
   CHANGE_OFFERS_LOADING_STATUS: 'changeOffersLoadingStatus',
+  CHANGE_OFFER_LOADING_STATUS: 'changeOfferLoadingStatus',
   SAVE_LOGIN: 'saveLogin',
   REMOVE_LOGIN: 'removeLogin',
   REDIRECT: 'redirect',
+  LOAD_OFFER: 'loadOffer',
+  LOAD_NEARBY: 'loadNearby',
 };
 
 export const ActionCreator = {
@@ -39,6 +42,14 @@ export const ActionCreator = {
     type: ActionType.LOAD_OFFERS,
     payload: offers,
   }),
+  loadOffer: (offer) => ({
+    type: ActionType.LOAD_OFFER,
+    payload: offer,
+  }),
+  loadNearby: (offers) => ({
+    type: ActionType.LOAD_NEARBY,
+    payload: offers,
+  }),
   loadComments: (comments) => ({
     type: ActionType.LOAD_COMMENTS,
     payload: comments,
@@ -49,6 +60,10 @@ export const ActionCreator = {
   }),
   changeOffersLoadingStatus: (status) => ({
     type: ActionType.CHANGE_OFFERS_LOADING_STATUS,
+    payload: !status,
+  }),
+  changeOfferLoadingStatus: (status) => ({
+    type: ActionType.CHANGE_OFFER_LOADING_STATUS,
     payload: !status,
   }),
   saveLogin: (login) => ({

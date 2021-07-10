@@ -1,6 +1,6 @@
 import {APIRoute, AppRoute, AuthorizationStatus} from '../const';
 import {ActionCreator} from './action';
-import {adaptOfferToClient} from '../adapters';
+import {adaptCommentToClient, adaptOfferToClient} from '../adapters';
 
 export const fetchOffers = () => (dispatch, _getState, api) => (
   api.get(APIRoute.OFFERS)
@@ -8,9 +8,20 @@ export const fetchOffers = () => (dispatch, _getState, api) => (
     .then(() => dispatch(ActionCreator.changeOffersLoadingStatus()))
 );
 
-export const fetchComments = () => (dispatch, _getState, api) => (
-  api.get(APIRoute.COMMENTS)
-    .then(({data}) => dispatch(ActionCreator.loadComments(data)))
+export const fetchOffer = (id) => (dispatch, _getState, api) => (
+  api.get(`${APIRoute.OFFERS}/${id}`)
+    .then(({data}) => dispatch(ActionCreator.loadOffer(adaptOfferToClient(data))))
+    .then(() => dispatch(ActionCreator.changeOfferLoadingStatus()))
+);
+
+export const fetchComments = (id) => (dispatch, _getState, api) => (
+  api.get(`${APIRoute.COMMENTS}/${id}`)
+    .then(({data}) => dispatch(ActionCreator.loadComments(data.map((comment) => adaptCommentToClient(comment)))))
+);
+
+export const fetchNearby = (id) => (dispatch, _getState, api) => (
+  api.get(`${APIRoute.OFFERS}/${id}/nearby`)
+    .then(({data}) => dispatch(ActionCreator.loadNearby(data.map((offer) => adaptOfferToClient(offer)))))
 );
 
 export const checkAuth = () => (dispatch, _getState, api) => (

@@ -1,16 +1,18 @@
 import {ActionType} from './action';
 import {AuthorizationStatus, SortType} from '../const';
-import {comments} from '../mocks/comments';
 
 const initialState = {
   city: 'Paris',
   offers: [],
-  comments: comments,
+  comments: [],
   sortType: SortType.POPULAR,
-  currentOffer: null,
+  hoveredOffer: null,
+  selectedOffer: null,
+  nearbyOffers: [],
   isSortOpened: false,
   authorizationStatus: AuthorizationStatus.UNKNOWN,
   isOffersLoaded: false,
+  isOfferLoaded: false,
   login: '',
 };
 
@@ -31,12 +33,12 @@ const reducer = (state = initialState, action) => {
     case ActionType.SELECT_OFFER:
       return {
         ...state,
-        currentOffer: action.payload,
+        hoveredOffer: action.payload,
       };
     case ActionType.UNSELECT_OFFER:
       return {
         ...state,
-        currentOffer: action.payload,
+        hoveredOffer: action.payload,
       };
     case ActionType.TOGGLE_SORT:
       return {
@@ -48,10 +50,20 @@ const reducer = (state = initialState, action) => {
         ...state,
         offers: action.payload,
       };
+    case ActionType.LOAD_OFFER:
+      return {
+        ...state,
+        selectedOffer: action.payload,
+      };
     case ActionType.LOAD_COMMENTS:
       return {
         ...state,
-        offers: action.payload,
+        comments: action.payload,
+      };
+    case ActionType.LOAD_NEARBY:
+      return {
+        ...state,
+        nearbyOffers: action.payload,
       };
     case ActionType.REQUIRE_AUTHORIZATION:
       return {
@@ -67,6 +79,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isOffersLoaded: action.payload,
+      };
+    case ActionType.CHANGE_OFFER_LOADING_STATUS:
+      return {
+        ...state,
+        isOfferLoaded: action.payload,
       };
     case ActionType.SAVE_LOGIN: {
       return {
