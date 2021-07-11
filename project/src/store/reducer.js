@@ -14,6 +14,10 @@ const initialState = {
   isOffersLoaded: false,
   isOfferLoaded: false,
   login: '',
+  // newComment: {
+  //   comment: '',
+  //   rating: null,
+  // },
 };
 
 const reducer = (state = initialState, action) => {
@@ -60,6 +64,20 @@ const reducer = (state = initialState, action) => {
         ...state,
         comments: action.payload,
       };
+    // case ActionType.ADD_COMMENT:
+    //   return {
+    //     ...state,
+    //     newComment: {
+    //       comment: action.payload,
+    //     }
+    //   }
+    // case ActionType.ADD_RATING:
+    //   return {
+    //     ...state,
+    //     newComment: {
+    //       rating: action.payload,
+    //     }
+    //   }
     case ActionType.LOAD_NEARBY:
       return {
         ...state,

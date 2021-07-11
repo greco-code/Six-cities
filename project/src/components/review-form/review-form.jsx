@@ -1,24 +1,58 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import StarsRating from '../stars-rating/stars-rating';
+import {connect} from 'react-redux';
+import {postComment} from '../../store/api-actions';
+import PropTypes from 'prop-types';
 
-function ReviewForm() {
-  // eslint-disable-next-line no-unused-vars
-  const [comment, setComment] = useState('');
+function ReviewForm(props) {
+  const {sendReview, id} = props;
+
+  const [comment, setComment] = useState({
+    comment: '',
+    rating: null,
+  });
+
+  const reviewRef = useRef();
+  const ratingRef = useRef();
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+
+    sendReview(id, {
+      comment: comment.comment,
+      rating: comment.rating,
+    });
+  };
+
+  const handleCommentChange = (evt) => {
+    setComment((prevState) => ({...prevState, comment: evt.target.value}));
+  };
+
+  const handleRatingChange = (evt) => {
+    setComment((prevState) => ({...prevState, rating: evt.target.value}));
+  };
 
   return (
     <form
       className="reviews__form form"
       action="#"
       method="post"
-      onSubmit={(evt) => {
-        evt.preventDefault();
-        const writtenComment = document.querySelector('.reviews__textarea').value;
-        setComment(writtenComment);
-      }}
+      onSubmit={handleSubmit}
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
-      <StarsRating/>
-      <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved"/>
+      <StarsRating
+        ref={ratingRef}
+        handleChange={handleRatingChange}
+      />
+      <textarea
+        className="reviews__textarea form__textarea"
+        id="review"
+        name="review"
+        placeholder="Tell how was your stay, what you like and what can be improved"
+        ref={reviewRef}
+        value={comment.value}
+        onChange={handleCommentChange}
+      />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least
@@ -31,4 +65,16 @@ function ReviewForm() {
   );
 }
 
-export default ReviewForm;
+ReviewForm.propTypes = {
+  sendReview: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  sendReview(id, comment) {
+    dispatch(postComment(id, comment));
+  },
+});
+
+export {ReviewForm};
+export default connect(null, mapDispatchToProps)(ReviewForm);

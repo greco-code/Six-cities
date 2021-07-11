@@ -15,6 +15,8 @@ export const ActionType = {
   REDIRECT: 'redirect',
   LOAD_OFFER: 'loadOffer',
   LOAD_NEARBY: 'loadNearby',
+  ADD_COMMENT: 'addComment',
+  ADD_RATING: 'addRating',
 };
 
 export const ActionCreator = {
@@ -53,6 +55,14 @@ export const ActionCreator = {
   loadComments: (comments) => ({
     type: ActionType.LOAD_COMMENTS,
     payload: comments,
+  }),
+  addComment: (comment) => ({
+    type: ActionType.ADD_COMMENT,
+    payload: comment,
+  }),
+  addRating: (rating) => ({
+    type: ActionType.ADD_RATING,
+    payload: rating,
   }),
   requireAuthorization: (status) => ({
     type: ActionType.REQUIRE_AUTHORIZATION,

@@ -29,18 +29,20 @@ function Map(props) {
   const map = useMap(mapRef, city);
   const markers = leaflet.layerGroup();
 
+  const pins = currentOffer ? [...offers, currentOffer] : offers;
+
   useEffect(() => {
     if (map) {
       map.flyTo(leaflet.latLng(COORDINATES[city].LAT, COORDINATES[city].LNG), ZOOM);
 
       markers.clearLayers();
-      offers.forEach((offer) => {
+      pins.forEach((pin) => {
         const marker = leaflet
           .marker({
-            lat: offer.location.latitude,
-            lng: offer.location.longitude,
+            lat: pin.location.latitude,
+            lng: pin.location.longitude,
           }, {
-            icon: (currentOffer && offer.id === currentOffer.id)
+            icon: (currentOffer && pin.id === currentOffer.id)
               ? currentCustomIcon
               : defaultCustomIcon,
           });
