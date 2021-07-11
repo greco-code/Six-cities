@@ -29,15 +29,12 @@ function Map(props) {
   const map = useMap(mapRef, city);
   const markers = leaflet.layerGroup();
 
-  const fullOffers = offers.slice();
-  fullOffers.push(currentOffer);
-
   useEffect(() => {
     if (map) {
       map.flyTo(leaflet.latLng(COORDINATES[city].LAT, COORDINATES[city].LNG), ZOOM);
 
       markers.clearLayers();
-      fullOffers.forEach((offer) => {
+      offers.forEach((offer) => {
         const marker = leaflet
           .marker({
             lat: offer.location.latitude,

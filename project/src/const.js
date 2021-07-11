@@ -3,6 +3,7 @@ export const AppRoute = {
   LOGIN: '/login',
   FAVORITES: '/favorites-page',
   ROOM: '/offer/:id',
+  ERROR: '/error'
 };
 
 export const CONVERT_TO_RATING = 20;

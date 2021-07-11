@@ -12,6 +12,7 @@ export const fetchOffer = (id) => (dispatch, _getState, api) => (
   api.get(`${APIRoute.OFFERS}/${id}`)
     .then(({data}) => dispatch(ActionCreator.loadOffer(adaptOfferToClient(data))))
     .then(() => dispatch(ActionCreator.changeOfferLoadingStatus()))
+    .catch(() => dispatch(ActionCreator.redirect(AppRoute.ERROR)))
 );
 
 export const fetchComments = (id) => (dispatch, _getState, api) => (

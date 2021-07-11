@@ -20,6 +20,7 @@ import NearbyPoints from '../../nearby-points/nearby-points';
 
 function PointInfoPage(props) {
   const {offer, comments, nearbyOffers, city, isOfferLoaded} = props;
+  // const {images, isFavorite, isPremium, rating, title, type, description, bedrooms, maxAdults, price, goods, host} = offer;
 
   const dispatch = useDispatch();
   const params = useParams();
@@ -30,32 +31,29 @@ function PointInfoPage(props) {
     dispatch(fetchNearby(params.id));
   }, [dispatch, params.id]);
 
-  if (!offer || !comments || !nearbyOffers) {
-    return (
-      <LoadWrapper isDataLoaded/>
-    );
-  }
-
   return (
-    <div className="page">
-      <Header/>
-      <main className="page__main page__main--property">
-        <section className="property">
-          {
-            offer.images &&
-            <OfferImages images={offer.images}/>
-          }
-          <div className="property__container container">
+    <LoadWrapper isDataLoaded={isOfferLoaded}>
+      <div className="page">
+        <Header/>
+        <main className="page__main page__main--property">
+          <section className="property">
+            {
+              offer &&
+              offer.images &&
+              <OfferImages images={offer.images}/>
+            }
+            <div className="property__container container">
             <div className="property__wrapper">
               {
+                offer &&
                 offer.isPremium &&
                 <PremiumLabel/>
               }
               <div className="property__name-wrapper">
                 <h1 className="property__name">
-                  {offer.title}
+                  {offer && offer.title}
                 </h1>
-                <button className={`property__bookmark-button button ${offer.isFavorite && 'property__bookmark-button--active'}`} type="button">
+                <button className={`property__bookmark-button button ${offer && offer.isFavorite && 'property__bookmark-button--active'}`} type="button">
                   <svg className="property__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"/>
                   </svg>
@@ -64,44 +62,45 @@ function PointInfoPage(props) {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{width: (`${offer.rating * CONVERT_TO_RATING}%`)}}/>
+                  <span style={{width: (`${offer && offer.rating * CONVERT_TO_RATING}%`)}}/>
                   <span className="visually-hidden">Rating</span>
                 </div>
-                <span className="property__rating-value rating__value">{offer.rating}</span>
+                <span className="property__rating-value rating__value">{offer && offer.rating}</span>
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
-                  {offer.type}
+                  {offer && offer.type}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
-                  {offer.bedrooms} Bedrooms
+                  {offer && offer.bedrooms} Bedrooms
                 </li>
                 <li className="property__feature property__feature--adults">
-                  Max {offer.maxAdults} adults
+                  Max {offer && offer.maxAdults} adults
                 </li>
               </ul>
               <div className="property__price">
-                <b className="property__price-value">&euro;{offer.price}</b>
+                <b className="property__price-value">&euro;{offer && offer.price}</b>
                 <span className="property__price-text">&nbsp;night</span>
               </div>
-              <GoodsList goods={offer.goods}/>
+              <GoodsList goods={offer && offer.goods}/>
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
-                  <div className={`property__avatar-wrapper ${offer.host.isPro && 'property__avatar-wrapper--pro'} user__avatar-wrapper`}>
-                    <img className="property__avatar user__avatar" src={offer.host.avatarUrl} width="74" height="74" alt="Host avatar"/>
+                  <div className={`property__avatar-wrapper ${offer && offer.host.isPro && 'property__avatar-wrapper--pro'} user__avatar-wrapper`}>
+                    <img className="property__avatar user__avatar" src={offer && offer.host.avatarUrl} width="74" height="74" alt="Host avatar"/>
                   </div>
                   <span className="property__user-name">
-                    {offer.host.name}
+                    {offer && offer.host.name}
                   </span>
                   {
+                    offer &&
                     offer.host.isPro &&
                     <ProLabel/>
                   }
                 </div>
                 <div className="property__description">
                   <p className="property__text">
-                    {offer.description}
+                    {offer && offer.description}
                   </p>
                 </div>
               </div>
@@ -115,15 +114,16 @@ function PointInfoPage(props) {
           </div>
           <section className="property__map map">
             <LoadWrapper isDataLoaded={isOfferLoaded} isEmpty>
-              <Map city={city} offers={nearbyOffers} currentOffer={offer}/>
+              <Map city={city} offers={nearbyOffers} currentOffer={offer} isPointInfoPage/>
             </LoadWrapper>
           </section>
-        </section>
-        <div className="container">
-          <NearbyPoints nearbyOffers={nearbyOffers}/>
-        </div>
-      </main>
-    </div>
+          </section>
+          <div className="container">
+            <NearbyPoints nearbyOffers={nearbyOffers}/>
+          </div>
+        </main>
+      </div>
+    </LoadWrapper>
   );
 }
 
