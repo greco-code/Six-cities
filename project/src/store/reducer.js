@@ -1,5 +1,7 @@
 import {ActionType} from './action';
 import {AuthorizationStatus, SortType} from '../const';
+import {defaultOffer} from '../utils';
+
 
 const initialState = {
   city: 'Paris',
@@ -7,7 +9,7 @@ const initialState = {
   comments: [],
   sortType: SortType.POPULAR,
   hoveredOffer: null,
-  selectedOffer: null,
+  selectedOffer: defaultOffer,
   nearbyOffers: [],
   isSortOpened: false,
   authorizationStatus: AuthorizationStatus.UNKNOWN,

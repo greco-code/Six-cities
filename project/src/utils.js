@@ -11,3 +11,38 @@ export const isPlural = (amount, word, suffix = 's') => {
 };
 
 export const isCheckedAuth = (authorizationStatus) => authorizationStatus === AuthorizationStatus.UNKNOWN;
+
+export const defaultOffer = {
+  bedrooms: null,
+  city: {
+    location: {
+      latitude: null,
+      longitude: null,
+      zoom: null,
+    },
+    name: '',
+  },
+  description: '',
+  goods: [],
+  host: {
+    avatarUrl: '',
+    id: null,
+    isPro: null,
+    name: '',
+  },
+  id: null,
+  images: [],
+  isFavorite: null,
+  isPremium: null,
+  location: {
+    latitude: null,
+    longitude: null,
+    zoom: null,
+  },
+  maxAdults: null,
+  previewImage: '',
+  price: null,
+  rating: null,
+  title: '',
+  type: '',
+};

@@ -67,7 +67,7 @@ function ReviewForm(props) {
 
 ReviewForm.propTypes = {
   sendReview: PropTypes.func.isRequired,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({

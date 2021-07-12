@@ -12,7 +12,7 @@ export const fetchOffer = (id) => (dispatch, _getState, api) => (
   api.get(`${APIRoute.OFFERS}/${id}`)
     .then(({data}) => dispatch(ActionCreator.loadOffer(adaptOfferToClient(data))))
     .then(() => dispatch(ActionCreator.changeOfferLoadingStatus()))
-    // .catch(() => dispatch(ActionCreator.redirect(AppRoute.ERROR)))
+  // .catch(() => dispatch(ActionCreator.redirect(AppRoute.ERROR)))
 );
 
 export const fetchComments = (id) => (dispatch, _getState, api) => (
@@ -27,7 +27,7 @@ export const fetchNearby = (id) => (dispatch, _getState, api) => (
 
 export const postComment = (id, comment) => (dispatch, _getState, api) => (
   api.post(`${APIRoute.COMMENTS}/${id}`, comment)
-)
+);
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(APIRoute.LOGIN)

@@ -17,10 +17,10 @@ import {fetchComments, fetchNearby, fetchOffer} from '../../../store/api-actions
 import {useParams} from 'react-router-dom';
 import NearbyPoints from '../../nearby-points/nearby-points';
 
-
 function PointInfoPage(props) {
   const {offer, comments, nearbyOffers, city, isOfferLoaded} = props;
-  // const {images, isFavorite, isPremium, rating, title, type, description, bedrooms, maxAdults, price, goods, host} = offer;
+  const {images, isFavorite, isPremium, rating, title, type, description, bedrooms, maxAdults, price, goods, host} = offer;
+
 
   const dispatch = useDispatch();
   const params = useParams();
@@ -31,10 +31,6 @@ function PointInfoPage(props) {
     dispatch(fetchNearby(params.id));
   }, [dispatch, params.id]);
 
-  if (isOfferLoaded) {
-    console.log(...nearbyOffers, offer);
-  }
-
   return (
     <LoadWrapper isDataLoaded={isOfferLoaded}>
       <div className="page">
@@ -42,22 +38,20 @@ function PointInfoPage(props) {
         <main className="page__main page__main--property">
           <section className="property">
             {
-              offer &&
-              offer.images &&
-              <OfferImages images={offer.images}/>
+              images &&
+              <OfferImages images={images}/>
             }
             <div className="property__container container">
               <div className="property__wrapper">
                 {
-                  offer &&
-                  offer.isPremium &&
+                  isPremium &&
                   <PremiumLabel/>
                 }
                 <div className="property__name-wrapper">
                   <h1 className="property__name">
-                    {offer && offer.title}
+                    {title}
                   </h1>
-                  <button className={`property__bookmark-button button ${offer && offer.isFavorite && 'property__bookmark-button--active'}`} type="button">
+                  <button className={`property__bookmark-button button ${isFavorite && 'property__bookmark-button--active'}`} type="button">
                     <svg className="property__bookmark-icon" width="31" height="33">
                       <use xlinkHref="#icon-bookmark"/>
                     </svg>
@@ -66,45 +60,45 @@ function PointInfoPage(props) {
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">
-                    <span style={{width: (`${offer && offer.rating * CONVERT_TO_RATING}%`)}}/>
+                    <span style={{width: (`${rating * CONVERT_TO_RATING}%`)}}/>
                     <span className="visually-hidden">Rating</span>
                   </div>
-                  <span className="property__rating-value rating__value">{offer && offer.rating}</span>
+                  <span className="property__rating-value rating__value">{rating}</span>
                 </div>
                 <ul className="property__features">
                   <li className="property__feature property__feature--entire">
-                    {offer && offer.type}
+                    {type}
                   </li>
                   <li className="property__feature property__feature--bedrooms">
-                    {offer && offer.bedrooms} Bedrooms
+                    {bedrooms} Bedrooms
                   </li>
                   <li className="property__feature property__feature--adults">
-                    Max {offer && offer.maxAdults} adults
+                    Max {maxAdults} adults
                   </li>
                 </ul>
                 <div className="property__price">
-                  <b className="property__price-value">&euro;{offer && offer.price}</b>
+                  <b className="property__price-value">&euro;{price}</b>
                   <span className="property__price-text">&nbsp;night</span>
                 </div>
-                <GoodsList goods={offer && offer.goods}/>
+                <GoodsList goods={goods}/>
                 <div className="property__host">
                   <h2 className="property__host-title">Meet the host</h2>
                   <div className="property__host-user user">
-                    <div className={`property__avatar-wrapper ${offer && offer.host.isPro && 'property__avatar-wrapper--pro'} user__avatar-wrapper`}>
-                      <img className="property__avatar user__avatar" src={offer && offer.host.avatarUrl} width="74" height="74" alt="Host avatar"/>
+                    <div className={`property__avatar-wrapper ${host.isPro && 'property__avatar-wrapper--pro'} user__avatar-wrapper`}>
+                      <img className="property__avatar user__avatar" src={host.avatarUrl} width="74" height="74" alt="Host avatar"/>
                     </div>
                     <span className="property__user-name">
-                    {offer && offer.host.name}
-                  </span>
+                      {host.name}
+                    </span>
                     {
-                      offer &&
-                      offer.host.isPro &&
+
+                      host.isPro &&
                       <ProLabel/>
                     }
                   </div>
                   <div className="property__description">
                     <p className="property__text">
-                      {offer && offer.description}
+                      {description}
                     </p>
                   </div>
                 </div>
