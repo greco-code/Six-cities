@@ -9,7 +9,7 @@ import PremiumLabel from '../../premium-label/premium-label';
 import ReviewsList from '../../reviews-list/reviews-list';
 import ProLabel from '../../pro-label/pro-label';
 import GoodsList from '../../goods-list/goods-list';
-import {CONVERT_TO_RATING} from '../../../const';
+import {AuthorizationStatus, CONVERT_TO_RATING} from '../../../const';
 import Map from '../../map/map';
 import {connect, useDispatch} from 'react-redux';
 import LoadWrapper from '../../load-wrapper/load-wrapper';
@@ -18,7 +18,7 @@ import {useParams} from 'react-router-dom';
 import NearbyPoints from '../../nearby-points/nearby-points';
 
 function PointInfoPage(props) {
-  const {offer, comments, nearbyOffers, city, isOfferLoaded} = props;
+  const {offer, comments, nearbyOffers, city, isOfferLoaded, authorizationStatus} = props;
   const {images, isFavorite, isPremium, rating, title, type, description, bedrooms, maxAdults, price, goods, host} = offer;
 
 
@@ -105,10 +105,13 @@ function PointInfoPage(props) {
                 <section className="property__reviews reviews">
                   <ReviewsList
                     comments={comments}
-                  />
-                  <ReviewForm
                     id={params.id}
                   />
+                  {
+                    authorizationStatus === AuthorizationStatus.AUTH
+                      ? <ReviewForm id={params.id}/>
+                      : ''
+                  }
                 </section>
               </div>
             </div>
@@ -133,6 +136,7 @@ PointInfoPage.propTypes = {
   nearbyOffers: PropTypes.arrayOf(offerProp).isRequired,
   isOfferLoaded: PropTypes.bool.isRequired,
   city: PropTypes.string.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -141,6 +145,7 @@ const mapStateToProps = (state) => ({
   nearbyOffers: state.nearbyOffers,
   isOfferLoaded: state.isOfferLoaded,
   city: state.city,
+  authorizationStatus: state.authorizationStatus,
 });
 
 export {PointInfoPage};

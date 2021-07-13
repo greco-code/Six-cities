@@ -16,10 +16,7 @@ const initialState = {
   isOffersLoaded: false,
   isOfferLoaded: false,
   login: '',
-  // newComment: {
-  //   comment: '',
-  //   rating: null,
-  // },
+  isCommentSend: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -104,6 +101,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isOfferLoaded: action.payload,
+      };
+    case ActionType.CHANGE_COMMENT_SENDING_STATUS:
+      return {
+        ...state,
+        isCommentSend: action.payload,
       };
     case ActionType.SAVE_LOGIN: {
       return {

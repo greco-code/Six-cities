@@ -27,6 +27,7 @@ export const fetchNearby = (id) => (dispatch, _getState, api) => (
 
 export const postComment = (id, comment) => (dispatch, _getState, api) => (
   api.post(`${APIRoute.COMMENTS}/${id}`, comment)
+    .then(() => dispatch(ActionCreator.changeCommentSendingStatus(true)))
 );
 
 export const checkAuth = () => (dispatch, _getState, api) => (

@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const STARS_AMOUNT = 5;
 
 function StarsRating(props) {
-  const {ref, handleChange} = props;
+  const {rating, setRating} = props;
 
   return (
     <div className="reviews__rating-form form__rating">
@@ -14,11 +15,11 @@ function StarsRating(props) {
             <input
               className="form__rating-input visually-hidden"
               name="rating"
-              value={index + 1}
+              value={STARS_AMOUNT - index}
               id={`${index + 1}-stars`}
               type="radio"
-              ref={ref}
-              onClick={handleChange}
+              onChange={(evt) => setRating(Number(evt.target.value))}
+              checked={rating === value}
             />
             <label htmlFor={`${index + 1}-stars`} className="reviews__rating-label form__rating-label" title="good">
               <svg className="form__star-image" width="37" height="33">
@@ -31,5 +32,10 @@ function StarsRating(props) {
     </div>
   );
 }
+
+StarsRating.propTypes = {
+  rating: PropTypes.number.isRequired,
+  setRating: PropTypes.func.isRequired,
+};
 
 export default StarsRating;

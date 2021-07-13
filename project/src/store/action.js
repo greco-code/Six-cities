@@ -17,6 +17,7 @@ export const ActionType = {
   LOAD_NEARBY: 'loadNearby',
   ADD_COMMENT: 'addComment',
   ADD_RATING: 'addRating',
+  CHANGE_COMMENT_SENDING_STATUS: 'changeCommentSendingStatus',
 };
 
 export const ActionCreator = {
@@ -75,6 +76,10 @@ export const ActionCreator = {
   changeOfferLoadingStatus: (status) => ({
     type: ActionType.CHANGE_OFFER_LOADING_STATUS,
     payload: !status,
+  }),
+  changeCommentSendingStatus: (status) => ({
+    type: ActionType.CHANGE_COMMENT_SENDING_STATUS,
+    payload: status,
   }),
   saveLogin: (login) => ({
     type: ActionType.SAVE_LOGIN,
