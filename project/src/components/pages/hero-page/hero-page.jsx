@@ -17,10 +17,9 @@ import LoadWrapper from '../../load-wrapper/load-wrapper';
 
 
 function HeroPage(props) {
-  const {offers, city, currentSortType, currentOffer, isOffersLoaded} = props;
+  const {offers, city, currentSortType, hoveredOffer, isOffersLoaded} = props;
   const offersByCity = offers && getOffersList(offers, city);
   const sortedOffers = offersByCity && sort(currentSortType, offersByCity);
-
 
   const dispatch = useDispatch();
 
@@ -61,7 +60,7 @@ function HeroPage(props) {
             <div className="cities__right-section">
               <section className="cities__map map">
                 <LoadWrapper isDataLoaded={isOffersLoaded} isEmpty>
-                  <Map city={city} offers={sortedOffers} currentOffer={currentOffer}/>
+                  <Map city={city} offers={sortedOffers} currentOffer={hoveredOffer}/>
                 </LoadWrapper>
               </section>
             </div>
@@ -77,7 +76,7 @@ HeroPage.propTypes = {
   offers: PropTypes.arrayOf(offerProp).isRequired,
   city: PropTypes.string.isRequired,
   currentSortType: PropTypes.string.isRequired,
-  currentOffer: offerProp,
+  hoveredOffer: offerProp,
   isOffersLoaded: PropTypes.bool.isRequired,
 };
 
@@ -85,7 +84,7 @@ const mapStateToProps = (state) => ({
   city: state.city,
   offers: state.offers,
   currentSortType: state.sortType,
-  currentOffer: state.currentOffer,
+  hoveredOffer: state.hoveredOffer,
   isOffersLoaded: state.isOffersLoaded,
 });
 
