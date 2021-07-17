@@ -108,9 +108,8 @@ function PointInfoPage(props) {
                     id={params.id}
                   />
                   {
-                    authorizationStatus === AuthorizationStatus.AUTH
-                      ? <ReviewForm id={params.id}/>
-                      : ''
+                    authorizationStatus === AuthorizationStatus.AUTH &&
+                    <ReviewForm id={params.id}/>
                   }
                 </section>
               </div>
