@@ -3,7 +3,7 @@ export const AppRoute = {
   LOGIN: '/login',
   FAVORITES: '/favorites-page',
   ROOM: '/offer/:id',
-  ERROR: '/error'
+  ERROR: '/error',
 };
 
 export const CONVERT_TO_RATING = 20;
@@ -53,6 +53,7 @@ export const APIRoute = {
   COMMENTS: '/comments',
   LOGIN: '/login',
   LOGOUT: '/logout',
+  FAVORITE: '/favorite',
 };
 
 export const COORDINATES = {

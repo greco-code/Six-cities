@@ -1,11 +1,13 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import {useSelector} from 'react-redux';
 import PropTypes from 'prop-types';
 import {Redirect, Route} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
 import LoadWrapper from '../load-wrapper/load-wrapper';
+import {getAuthStatus} from '../../store/login-reducer/selectors';
 
-function PrivateRoute({render, path, exact, authorizationStatus}) {
+function PrivateRoute({render, path, exact}) {
+  const authorizationStatus = useSelector(getAuthStatus);
 
   return (
     <LoadWrapper isDataLoaded={authorizationStatus !== AuthorizationStatus.UNKNOWN}>
@@ -23,16 +25,9 @@ function PrivateRoute({render, path, exact, authorizationStatus}) {
 }
 
 PrivateRoute.propTypes = {
-  authorizationStatus: PropTypes.string,
   exact: PropTypes.bool.isRequired,
   path: PropTypes.string.isRequired,
   render: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  authorizationStatus: state.authorizationStatus,
-});
-
-
-export {PrivateRoute};
-export default connect(mapStateToProps)(PrivateRoute);
+export default PrivateRoute;

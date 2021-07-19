@@ -1,15 +1,15 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {logout} from '../../store/api-actions';
-import {ActionCreator} from '../../store/action';
-import PropTypes from 'prop-types';
+import {removeLogin} from '../../store/action';
 
-function SignoutLink(props) {
-  const {signOut} = props;
+function SignoutLink() {
+  const dispatch = useDispatch();
 
   const handleClick = (evt) => {
     evt.preventDefault();
-    signOut();
+    dispatch(logout());
+    dispatch(removeLogin());
   };
 
   return (
@@ -25,16 +25,5 @@ function SignoutLink(props) {
   );
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  signOut() {
-    dispatch(logout());
-    dispatch(ActionCreator.removeLogin());
-  },
-});
 
-SignoutLink.propTypes = {
-  signOut: PropTypes.func.isRequired,
-};
-
-export {SignoutLink};
-export default connect(null, mapDispatchToProps)(SignoutLink);
+export default SignoutLink;

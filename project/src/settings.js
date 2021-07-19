@@ -21,6 +21,7 @@ export const PointTypeSettings = {
     articleClass: 'cities__place-card place-card',
     imageContainerClass: 'cities__image-wrapper place-card__image-wrapper',
     infoContainerClass: 'place-card__info',
+    isBookmark: true,
   },
 
   FAVORITES: {

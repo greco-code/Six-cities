@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 function LoadWrapper(props) {
   const {isDataLoaded, children, Loader = Spinner, isEmpty = false} = props;
 
+
   if (isEmpty && !isDataLoaded) {
     return '';
   }

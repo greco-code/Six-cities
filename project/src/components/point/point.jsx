@@ -4,19 +4,28 @@ import pointTypeProp from '../../props/pointType.prop';
 import BookmarkButton from '../bookmark-button/bookmark-button';
 import {generatePath, Link} from 'react-router-dom';
 import {AppRoute, CONVERT_TO_RATING} from '../../const';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {ActionCreator} from '../../store/action';
+import {useDispatch} from 'react-redux';
+import {selectOffer, unselectOffer} from '../../store/action';
 
 function Point(props) {
-  const {offer, type, hoverOffer, unhoverOffer} = props;
+  const dispatch = useDispatch();
+
+  const {offer, type} = props;
   const {isPremium, isFavorite, rating, price, previewImage, id, title} = offer;
+
+  const onOfferHover = (hoveredOffer) => {
+    dispatch(selectOffer(hoveredOffer));
+  };
+
+  const onOfferUnhover = () => {
+    dispatch(unselectOffer());
+  };
 
   return (
     <article
       className={type.articleClass}
-      onMouseEnter={() => hoverOffer(offer)}
-      onMouseLeave={unhoverOffer}
+      onMouseEnter={() => onOfferHover(offer)}
+      onMouseLeave={onOfferUnhover}
     >
       {isPremium && (
         <div className="place-card__mark">
@@ -34,7 +43,7 @@ function Point(props) {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <BookmarkButton isFavorite={isFavorite}/>
+          <BookmarkButton isFavorite={isFavorite} isFromMain={type.isBookmark} id={id}/>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
@@ -54,14 +63,6 @@ function Point(props) {
 Point.propTypes = {
   offer: offerProp,
   type: pointTypeProp,
-  hoverOffer: PropTypes.func.isRequired,
-  unhoverOffer: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = {
-  hoverOffer: ActionCreator.selectOffer,
-  unhoverOffer: ActionCreator.unselectOffer,
-};
-
-export {Point};
-export default connect(null, mapDispatchToProps)(Point);
+export default Point;
