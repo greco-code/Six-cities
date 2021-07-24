@@ -1,5 +1,6 @@
 import {APIRoute, AppRoute, AuthorizationStatus} from '../const';
 import {
+  addFavoriteOffer,
   changeCommentSendingStatus,
   changeOfferLoadingStatus,
   changeOffersLoadingStatus,
@@ -44,12 +45,15 @@ export const fetchFavorites = () => (dispatch, _getState, api) => (
 
 export const postComment = (id, comment) => (dispatch, _getState, api) => (
   api.post(`${APIRoute.COMMENTS}/${id}`, comment)
+    .then(({data}) => dispatch(loadComments(data.map((item) => adaptCommentToClient(item)))))
     .then(() => dispatch(changeCommentSendingStatus(true)))
 );
 
 export const addToFavorites = (id, status) => (dispatch, _getState, api) => (
   api.post(`${APIRoute.FAVORITE}/${id}/${status}`)
-    .then(() => dispatch(fetchFavorites()))
+    .then(({data}) => dispatch(addFavoriteOffer(adaptOfferToClient(data))))
+    .then(() => dispatch(fetchOffers()))
+    .then(() => dispatch(fetchOffer(id)))
 );
 
 export const checkAuth = () => (dispatch, _getState, api) => (

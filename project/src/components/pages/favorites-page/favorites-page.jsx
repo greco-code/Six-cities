@@ -6,10 +6,12 @@ import {getFavoriteOffers} from '../../../store/data-reducer/selectors';
 import {fetchFavorites} from '../../../store/api-actions';
 import Favorites from '../../favorites/favorites';
 import FavoritesEmpty from '../../favorites-empty/favorites-empty';
+import {BookmarkButtonSettings} from '../../../settings';
 
 
 function FavoritesPage() {
   const favoriteOffers = useSelector(getFavoriteOffers);
+  // console.log(typeof favoriteOffers);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -23,7 +25,7 @@ function FavoritesPage() {
       <Header/>
       {
         favoriteOffers.length
-          ? <Favorites offers={favoriteOffers} cities={cities}/>
+          ? <Favorites favoriteOffers={favoriteOffers} cities={cities} bookmarkSettings={BookmarkButtonSettings.FAVORITES}/>
           : <FavoritesEmpty/>
       }
       <Footer/>

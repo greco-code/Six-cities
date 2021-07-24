@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import PointsList from '../../points-list/points-list';
 import Header from '../../header/header';
-import {PointTypeSettings} from '../../../settings';
+import {BookmarkButtonSettings, PointTypeSettings} from '../../../settings';
 import Map from '../../map/map';
 import CitiesList from '../../citiesList/citiesList';
 import {CITIES} from '../../../const';
@@ -57,7 +57,8 @@ function HeroPage() {
                 <LoadWrapper isDataLoaded={isOffersLoaded}>
                   <PointsList
                     offers={sortedOffers}
-                    type={PointTypeSettings.MAIN}
+                    pointSettings={PointTypeSettings.MAIN}
+                    bookmarkSettings={BookmarkButtonSettings.MAIN}
                   />
                 </LoadWrapper>
               </div>

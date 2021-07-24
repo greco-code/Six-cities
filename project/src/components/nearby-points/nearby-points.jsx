@@ -1,6 +1,6 @@
 import React from 'react';
 import PointsList from '../points-list/points-list';
-import {PointTypeSettings} from '../../settings';
+import {BookmarkButtonSettings, PointTypeSettings} from '../../settings';
 import offerProp from '../../props/offer.prop';
 import PropTypes from 'prop-types';
 
@@ -13,7 +13,8 @@ function NearbyPoints(props) {
       <div className="near-places__list places__list">
         <PointsList
           offers={nearbyOffers}
-          type={PointTypeSettings.NEIGHBOURHOOD}
+          pointSettings={PointTypeSettings.NEIGHBOURHOOD}
+          bookmarkSettings={BookmarkButtonSettings.NEIGHBOURHOOD}
         />
       </div>
     </section>

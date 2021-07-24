@@ -1,16 +1,17 @@
 import React from 'react';
 import offerProp from '../../props/offer.prop';
-import pointTypeProp from '../../props/pointType.prop';
+import pointTypeProp from '../../props/pointSettings.prop';
 import BookmarkButton from '../bookmark-button/bookmark-button';
 import {generatePath, Link} from 'react-router-dom';
 import {AppRoute, CONVERT_TO_RATING} from '../../const';
 import {useDispatch} from 'react-redux';
 import {selectOffer, unselectOffer} from '../../store/action';
+import bookmarkSettingsProp from '../../props/bookmarkSettings.prop';
 
 function Point(props) {
   const dispatch = useDispatch();
 
-  const {offer, type} = props;
+  const {offer, pointSettings, bookmarkSettings} = props;
   const {isPremium, isFavorite, rating, price, previewImage, id, title} = offer;
 
   const onOfferHover = (hoveredOffer) => {
@@ -23,7 +24,7 @@ function Point(props) {
 
   return (
     <article
-      className={type.articleClass}
+      className={pointSettings.articleClass}
       onMouseEnter={() => onOfferHover(offer)}
       onMouseLeave={onOfferUnhover}
     >
@@ -32,18 +33,18 @@ function Point(props) {
           <span>Premium</span>
         </div>
       )}
-      <div className={type.imageContainerClass}>
+      <div className={pointSettings.imageContainerClass}>
         <Link to={{pathname: generatePath(AppRoute.ROOM, {id})}}>
-          <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image"/>
+          <img className="place-card__image" src={previewImage} width={pointSettings.imageWidth} height={pointSettings.imageHeight} alt="Place image"/>
         </Link>
       </div>
-      <div className={type.infoContainerClass}>
+      <div className={pointSettings.infoContainerClass}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <BookmarkButton isFavorite={isFavorite} isFromMain={type.isBookmark} id={id}/>
+          <BookmarkButton isFavorite={isFavorite} bookmarkSettings={bookmarkSettings} id={id}/>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
@@ -62,7 +63,8 @@ function Point(props) {
 
 Point.propTypes = {
   offer: offerProp,
-  type: pointTypeProp,
+  pointSettings: pointTypeProp,
+  bookmarkSettings: bookmarkSettingsProp,
 };
 
 export default Point;

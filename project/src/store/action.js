@@ -21,6 +21,7 @@ export const ActionType = {
   ADD_COMMENT: 'addComment',
   ADD_RATING: 'addRating',
   CHANGE_COMMENT_SENDING_STATUS: 'changeCommentSendingStatus',
+  ADD_FAVORITE_OFFER: 'addFavoriteOffer',
 };
 
 export const changeCity = createAction(ActionType.CHANGE_CITY, (city) => ({
@@ -57,6 +58,10 @@ export const loadNearby = createAction(ActionType.LOAD_NEARBY, (offers) => ({
 
 export const loadFavorites = createAction(ActionType.LOAD_FAVORITES, (offers) => ({
   payload: offers,
+}));
+
+export const addFavoriteOffer = createAction(ActionType.ADD_FAVORITE_OFFER, (offer) => ({
+  payload: offer,
 }));
 
 export const loadComments = createAction(ActionType.LOAD_COMMENTS, (comments) => ({

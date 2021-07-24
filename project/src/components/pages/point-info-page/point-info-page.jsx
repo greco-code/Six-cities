@@ -17,6 +17,7 @@ import {getComments, getNearbyOffers, getOffer, getOfferLoadingStatus} from '../
 import {getCity} from '../../../store/interface-reducer/selectors';
 import {getAuthStatus} from '../../../store/login-reducer/selectors';
 import BookmarkButton from '../../bookmark-button/bookmark-button';
+import {BookmarkButtonSettings} from '../../../settings';
 
 function PointInfoPage() {
   const offer = useSelector(getOffer);
@@ -58,7 +59,7 @@ function PointInfoPage() {
                   <h1 className="property__name">
                     {title}
                   </h1>
-                  <BookmarkButton isFavorite={isFavorite} isFromMain={false} id={id}/>
+                  <BookmarkButton isFavorite={isFavorite} bookmarkSettings={BookmarkButtonSettings.POINT_INFO} id={id}/>
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">
