@@ -22,6 +22,7 @@ export const ActionType = {
   ADD_RATING: 'addRating',
   CHANGE_COMMENT_SENDING_STATUS: 'changeCommentSendingStatus',
   ADD_FAVORITE_OFFER: 'addFavoriteOffer',
+  TOGGLE_IS_COMMENT_SEND: 'toggleIsCommentSend',
 };
 
 export const changeCity = createAction(ActionType.CHANGE_CITY, (city) => ({

@@ -46,6 +46,7 @@ export const fetchFavorites = () => (dispatch, _getState, api) => (
 export const postComment = (id, comment) => (dispatch, _getState, api) => (
   api.post(`${APIRoute.COMMENTS}/${id}`, comment)
     .then(({data}) => dispatch(loadComments(data.map((item) => adaptCommentToClient(item)))))
+    .then(() => dispatch(changeCommentSendingStatus(false)))
     .then(() => dispatch(changeCommentSendingStatus(true)))
 );
 
