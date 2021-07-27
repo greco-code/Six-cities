@@ -42,7 +42,7 @@ export const unselectOffer = createAction(ActionType.UNSELECT_OFFER, (offer) => 
 }));
 
 export const toggleSort = createAction(ActionType.TOGGLE_SORT, (bool) => ({
-  payload: bool,
+  payload: !bool,
 }));
 
 export const loadOffers = createAction(ActionType.LOAD_OFFERS, (offers) => ({
