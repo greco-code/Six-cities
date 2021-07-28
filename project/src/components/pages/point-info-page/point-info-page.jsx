@@ -30,7 +30,21 @@ function PointInfoPage() {
   const dispatch = useDispatch();
   const params = useParams();
 
-  const {images, isFavorite, id, isPremium, rating, title, type, description, bedrooms, maxAdults, price, goods, host} = offer;
+  const {
+    images,
+    isFavorite,
+    id,
+    isPremium,
+    rating,
+    title,
+    type,
+    description,
+    bedrooms,
+    maxAdults,
+    price,
+    goods,
+    host,
+  } = offer;
 
 
   useEffect(() => {

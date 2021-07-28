@@ -23,6 +23,8 @@ const initialState = {
   isCommentSend: false,
 };
 
+export const ITEMS_TO_REMOVE = 1;
+
 const dataReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(loadOffers, (state, action) => {
@@ -41,6 +43,22 @@ const dataReducer = createReducer(initialState, (builder) => {
       state.favoriteOffers = action.payload;
     })
     .addCase(addFavoriteOffer, (state, action) => {
+      if (action.payload.id === state.selectedOffer.id) {
+        state.selectedOffer.isFavorite = action.payload.isFavorite;
+      }
+
+      const index = state.favoriteOffers.findIndex((item) => item.id === action.payload.id);
+      state.favoriteOffers.splice(index, ITEMS_TO_REMOVE);
+
+      if (state.nearbyOffers.some((item) => item.id === action.payload.id)) {
+        state.nearbyOffers.find((item) => item.id === action.payload.id).isFavorite =
+          action.payload.isFavorite;
+      }
+
+      if (state.offers.some((item) => item.id === action.payload.id)) {
+        state.offers.find((item) => item.id === action.payload.id).isFavorite =
+          action.payload.isFavorite;
+      }
       state.favoriteOffers = [...state.favoriteOffers, action.payload];
     })
     .addCase(changeOffersLoadingStatus, (state, action) => {

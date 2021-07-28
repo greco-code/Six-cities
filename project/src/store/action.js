@@ -106,3 +106,7 @@ export const removeLogin = createAction(ActionType.REMOVE_LOGIN, () => ({
 export const redirect = createAction(ActionType.REDIRECT, (url) => ({
   payload: url,
 }));
+
+export const chooseOffer = createAction(ActionType.CHOOSE_OFFER, (offer) => ({
+  payload: offer,
+}));

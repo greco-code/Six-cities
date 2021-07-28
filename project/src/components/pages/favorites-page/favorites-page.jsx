@@ -16,7 +16,7 @@ function FavoritesPage() {
 
   useEffect(() => {
     dispatch(fetchFavorites());
-  }, []);
+  }, [favoriteOffers]);
 
   const cities = [...new Set(favoriteOffers.map((offer) => offer.city.name))];
 

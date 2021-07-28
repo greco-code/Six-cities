@@ -8,3 +8,4 @@ export const getFavoriteOffers = (state) => state[NameSpace.DATA].favoriteOffers
 export const getOffersLoadingStatus = (state) => state[NameSpace.DATA].isOffersLoaded;
 export const getOfferLoadingStatus = (state) => state[NameSpace.DATA].isOfferLoaded;
 export const getCommentSendingStatus = (state) => state[NameSpace.DATA].isCommentSend;
+export const getCurrentOffer = (state) => state[NameSpace.DATA].currentOffer;

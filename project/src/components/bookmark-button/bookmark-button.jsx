@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {useDispatch, useSelector} from 'react-redux';
-import {addToFavorites, fetchFavorites, fetchNearby, fetchOffer, fetchOffers} from '../../store/api-actions';
+import {addToFavorites} from '../../store/api-actions';
 import {getAuthStatus} from '../../store/login-reducer/selectors';
 import {redirect} from '../../store/action';
 import {AppRoute, AuthorizationStatus} from '../../const';
@@ -17,22 +17,22 @@ function BookmarkButton(props) {
       ? dispatch(addToFavorites(id, Number(!isFavorite)))
       : dispatch(redirect(AppRoute.LOGIN));
 
-    switch (bookmarkSettings.page) {
-      case 'NEIGHBOURHOOD':
-        dispatch(fetchNearby(id));
-        break;
-      case 'POINT_INFO':
-        dispatch(fetchOffer(id));
-        break;
-      case 'FAVORITES':
-        dispatch(fetchFavorites());
-        break;
-      case 'MAIN':
-        dispatch(fetchOffers());
-        break;
-      default:
-        break;
-    }
+    // switch (bookmarkSettings.page) {
+    //   case 'NEIGHBOURHOOD':
+    //     dispatch(fetchNearby(id));
+    //     break;
+    //   case 'POINT_INFO':
+    //     dispatch(fetchOffer(id));
+    //     break;
+    //   case 'FAVORITES':
+    //     dispatch(fetchFavorites());
+    //     break;
+    //   case 'MAIN':
+    //     dispatch(fetchOffers());
+    //     break;
+    //   default:
+    //     break;
+    // }
   };
 
   return (

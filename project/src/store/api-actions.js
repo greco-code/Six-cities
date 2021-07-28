@@ -23,7 +23,10 @@ export const fetchOffers = () => (dispatch, _getState, api) => (
 
 export const fetchOffer = (id) => (dispatch, _getState, api) => (
   api.get(`${APIRoute.OFFERS}/${id}`)
-    .then(({data}) => dispatch(loadOffer(adaptOfferToClient(data))))
+    .then(({data}) => {
+      dispatch(loadOffer(adaptOfferToClient(data)));
+      // dispatch(selectOffer(data));
+    })
     .then(() => dispatch(changeOfferLoadingStatus(true)))
     .catch(() => dispatch(redirect(AppRoute.ERROR)))
 );
@@ -53,8 +56,6 @@ export const postComment = (id, comment) => (dispatch, _getState, api) => (
 export const addToFavorites = (id, status) => (dispatch, _getState, api) => (
   api.post(`${APIRoute.FAVORITE}/${id}/${status}`)
     .then(({data}) => dispatch(addFavoriteOffer(adaptOfferToClient(data))))
-    .then(() => dispatch(fetchOffers()))
-    .then(() => dispatch(fetchOffer(id)))
 );
 
 export const checkAuth = () => (dispatch, _getState, api) => (
