@@ -10,8 +10,7 @@ function PointsList(props) {
 
   return (
     <div className="cities__places-list places__list tabs__content">
-      {/* eslint-disable-next-line react/no-array-index-key */}
-      {offers.map(((value, index) => <Point key={index} offer={offers[index]} pointSettings={pointSettings} bookmarkSettings={bookmarkSettings}/>))}
+      {offers.map(((offer, index) => <Point key={offer.id} offer={offers[index]} pointSettings={pointSettings} bookmarkSettings={bookmarkSettings}/>))}
     </div>
   );
 }

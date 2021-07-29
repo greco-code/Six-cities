@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-const STARS_AMOUNT = 5;
+import {RATING_OPTIONS} from '../../const';
 
 function StarsRating(props) {
   const {rating, setRating} = props;
@@ -9,20 +8,18 @@ function StarsRating(props) {
   return (
     <div className="reviews__rating-form form__rating">
       {
-        new Array(STARS_AMOUNT).fill().map((value, index) => (
-          //todo убрать индекс
-          // eslint-disable-next-line react/no-array-index-key
-          <React.Fragment key={index}>
+        RATING_OPTIONS.map(({value, title}) => (
+          <React.Fragment key={value}>
             <input
               className="form__rating-input visually-hidden"
               name="rating"
-              value={STARS_AMOUNT - index}
-              id={`${index + 1}-stars`}
+              value={value}
+              id={`${value}-stars`}
               type="radio"
               onChange={(evt) => setRating(Number(evt.target.value))}
-              checked={rating === STARS_AMOUNT - index}
+              checked={rating === value}
             />
-            <label htmlFor={`${index + 1}-stars`} className="reviews__rating-label form__rating-label" title="good">
+            <label htmlFor={`${value}-stars`} className="reviews__rating-label form__rating-label" title={title}>
               <svg className="form__star-image" width="37" height="33">
                 <use xlinkHref="#icon-star"/>
               </svg>
