@@ -6,7 +6,7 @@ import PremiumLabel from '../../premium-label/premium-label';
 import ReviewsList from '../../reviews-list/reviews-list';
 import ProLabel from '../../pro-label/pro-label';
 import GoodsList from '../../goods-list/goods-list';
-import {AuthorizationStatus, CONVERT_TO_RATING} from '../../../const';
+import {AuthorizationStatus, CONVERT_TO_RATING, OFFER_LOADING_STATUS, OFFERS_LOADING_STATUS} from '../../../const';
 import Map from '../../map/map';
 import {useDispatch, useSelector} from 'react-redux';
 import LoadWrapper from '../../load-wrapper/load-wrapper';
@@ -18,13 +18,15 @@ import {getCity} from '../../../store/interface-reducer/selectors';
 import {getAuthStatus} from '../../../store/login-reducer/selectors';
 import BookmarkButton from '../../bookmark-button/bookmark-button';
 import {BookmarkButtonSettings} from '../../../settings';
+import {changeOfferLoadingStatus} from '../../../store/action';
+import Toast from '../../../error-banner/error-banner';
 
 function PointInfoPage() {
   const offer = useSelector(getOffer);
   const comments = useSelector(getComments);
   const nearbyOffers = useSelector(getNearbyOffers);
   const city = useSelector(getCity);
-  const isOfferLoaded = useSelector(getOfferLoadingStatus);
+  const offerLoadingStatus = useSelector(getOfferLoadingStatus);
   const authorizationStatus = useSelector(getAuthStatus);
 
   const dispatch = useDispatch();
@@ -48,20 +50,25 @@ function PointInfoPage() {
 
 
   useEffect(() => {
+    dispatch(changeOfferLoadingStatus(OFFER_LOADING_STATUS.NOT_LOADED));
     dispatch(fetchOffer(params.id));
     dispatch(fetchComments(params.id));
     dispatch(fetchNearby(params.id));
   }, [dispatch, params.id]);
 
   return (
-    <LoadWrapper isDataLoaded={isOfferLoaded}>
+    <LoadWrapper isDataLoaded={offerLoadingStatus === OFFER_LOADING_STATUS.LOADED}>
       <div className="page">
+        {
+          offerLoadingStatus === OFFERS_LOADING_STATUS.ERROR
+          && <Toast/>
+        }
         <Header/>
         <main className="page__main page__main--property">
           <section className="property">
             {
               images &&
-              <OfferImages images={images}/>
+              <OfferImages images={images.slice(0, 6)}/>
             }
             <div className="property__container container">
               <div className="property__wrapper">
@@ -132,7 +139,7 @@ function PointInfoPage() {
               </div>
             </div>
             <section className="property__map map">
-              <LoadWrapper isDataLoaded={isOfferLoaded} isEmpty>
+              <LoadWrapper isDataLoaded={offerLoadingStatus === OFFER_LOADING_STATUS.LOADED} isEmpty>
                 <Map city={city} offers={nearbyOffers} currentOffer={offer} isPointInfoPage/>
               </LoadWrapper>
             </section>

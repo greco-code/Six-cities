@@ -2,6 +2,7 @@ import {createReducer} from '@reduxjs/toolkit';
 import {
   addFavoriteOffer,
   changeCommentSendingStatus,
+  changeFavoritesLoadingStatus,
   changeOfferLoadingStatus,
   changeOffersLoadingStatus,
   loadComments,
@@ -11,6 +12,7 @@ import {
   loadOffers
 } from '../action';
 import {defaultOffer} from '../../utils';
+import {COMMENT_SENDING_STATUS, FAVORITES_LOADING_STATUS, OFFER_LOADING_STATUS, OFFERS_LOADING_STATUS} from '../../const';
 
 const initialState = {
   offers: [],
@@ -18,9 +20,10 @@ const initialState = {
   comments: [],
   nearbyOffers: [],
   favoriteOffers: [],
-  isOffersLoaded: false,
-  isOfferLoaded: false,
-  isCommentSend: false,
+  favoritesLoadingStatus: FAVORITES_LOADING_STATUS.NOT_LOADED,
+  offersLoadingStatus: OFFERS_LOADING_STATUS.NOT_LOADED,
+  offerLoadingStatus: OFFER_LOADING_STATUS.NOT_LOADED,
+  commentSendingStatus: COMMENT_SENDING_STATUS.NOT_SENT,
 };
 
 export const ITEMS_TO_REMOVE = 1;
@@ -62,13 +65,16 @@ const dataReducer = createReducer(initialState, (builder) => {
       state.favoriteOffers = [...state.favoriteOffers, action.payload];
     })
     .addCase(changeOffersLoadingStatus, (state, action) => {
-      state.isOffersLoaded = action.payload;
+      state.offersLoadingStatus = action.payload;
     })
     .addCase(changeOfferLoadingStatus, (state, action) => {
-      state.isOfferLoaded = action.payload;
+      state.offerLoadingStatus = action.payload;
     })
     .addCase(changeCommentSendingStatus, (state, action) => {
-      state.isCommentSend = action.payload;
+      state.commentSendingStatus = action.payload;
+    })
+    .addCase(changeFavoritesLoadingStatus, (state, action) => {
+      state.favoritesLoadingStatus = action.payload;
     });
 });
 

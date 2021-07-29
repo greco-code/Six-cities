@@ -15,7 +15,6 @@ const defaultCustomIcon = leaflet.icon({
   iconAnchor: [15, 30],
 });
 
-// eslint-disable-next-line no-unused-vars
 const currentCustomIcon = leaflet.icon({
   iconUrl: URL_MARKER_CURRENT,
   iconSize: [30, 30],

@@ -22,7 +22,8 @@ export const ActionType = {
   ADD_RATING: 'addRating',
   CHANGE_COMMENT_SENDING_STATUS: 'changeCommentSendingStatus',
   ADD_FAVORITE_OFFER: 'addFavoriteOffer',
-  TOGGLE_IS_COMMENT_SEND: 'toggleIsCommentSend',
+  TOGGLE_COMMENT_SENDING_STATUS: 'toggleCommentSendingStatus',
+  CHANGE_FAVORITES_LOADING_STATUS: 'changeFavoritesLoadingStatus',
 };
 
 export const changeCity = createAction(ActionType.CHANGE_CITY, (city) => ({
@@ -107,6 +108,6 @@ export const redirect = createAction(ActionType.REDIRECT, (url) => ({
   payload: url,
 }));
 
-export const chooseOffer = createAction(ActionType.CHOOSE_OFFER, (offer) => ({
-  payload: offer,
+export const changeFavoritesLoadingStatus = createAction(ActionType.CHANGE_FAVORITES_LOADING_STATUS, (status) => ({
+  payload: status,
 }));

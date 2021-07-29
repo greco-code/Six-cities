@@ -81,6 +81,53 @@ export const COORDINATES = {
     LAT: 51.225402,
     LNG: 6.776314,
   },
-
 };
+
 export const ZOOM = 13;
+
+export const RATING_OPTIONS = [
+  {
+    value: 5,
+    title: 'perfect',
+  },
+  {
+    value: 4,
+    title: 'good',
+  },
+  {
+    value: 3,
+    title: 'not bad',
+  },
+  {
+    value: 2,
+    title: 'bad',
+  },
+  {
+    value: 1,
+    title: 'terrible',
+  },
+];
+
+export const COMMENT_SENDING_STATUS = {
+  SENT: 'sent',
+  NOT_SENT: 'notSent',
+  ERROR: 'error',
+};
+
+export const OFFERS_LOADING_STATUS = {
+  LOADED: 'loaded',
+  NOT_LOADED: 'notLoaded',
+  ERROR: 'error',
+};
+
+export const OFFER_LOADING_STATUS = {
+  LOADED: 'loaded',
+  NOT_LOADED: 'notLoaded',
+  ERROR: 'error',
+};
+
+export const FAVORITES_LOADING_STATUS = {
+  LOADED: 'loaded',
+  NOT_LOADED: 'notLoaded',
+  ERROR: 'error',
+};

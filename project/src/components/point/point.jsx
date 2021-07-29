@@ -48,7 +48,7 @@ function Point(props) {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: (`${rating * CONVERT_TO_RATING}%`)}}/>
+            <span style={{width: (`${Math.round(rating) * CONVERT_TO_RATING}%`)}}/>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
