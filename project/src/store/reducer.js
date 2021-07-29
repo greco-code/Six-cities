@@ -1,7 +1,5 @@
 import {ActionType} from './action';
 import {AuthorizationStatus, SortType} from '../const';
-import {defaultOffer} from '../utils';
-
 
 const initialState = {
   city: 'Paris',
@@ -9,14 +7,13 @@ const initialState = {
   comments: [],
   sortType: SortType.POPULAR,
   hoveredOffer: null,
-  selectedOffer: defaultOffer,
+  selectedOffer: null,
   nearbyOffers: [],
   isSortOpened: false,
   authorizationStatus: AuthorizationStatus.UNKNOWN,
   isOffersLoaded: false,
   isOfferLoaded: false,
   login: '',
-  isCommentSend: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -61,22 +58,8 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_COMMENTS:
       return {
         ...state,
-        comments: action.payload,
+        offers: action.payload,
       };
-    // case ActionType.ADD_COMMENT:
-    //   return {
-    //     ...state,
-    //     newComment: {
-    //       comment: action.payload,
-    //     }
-    //   }
-    // case ActionType.ADD_RATING:
-    //   return {
-    //     ...state,
-    //     newComment: {
-    //       rating: action.payload,
-    //     }
-    //   }
     case ActionType.LOAD_NEARBY:
       return {
         ...state,
@@ -96,16 +79,6 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isOffersLoaded: action.payload,
-      };
-    case ActionType.CHANGE_OFFER_LOADING_STATUS:
-      return {
-        ...state,
-        isOfferLoaded: action.payload,
-      };
-    case ActionType.CHANGE_COMMENT_SENDING_STATUS:
-      return {
-        ...state,
-        isCommentSend: action.payload,
       };
     case ActionType.SAVE_LOGIN: {
       return {

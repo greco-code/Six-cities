@@ -1,3 +1,5 @@
+import {createAction} from '@reduxjs/toolkit';
+
 export const ActionType = {
   CHANGE_CITY: 'changeCity',
   CHANGE_SORT: 'changeSort',
@@ -15,86 +17,96 @@ export const ActionType = {
   REDIRECT: 'redirect',
   LOAD_OFFER: 'loadOffer',
   LOAD_NEARBY: 'loadNearby',
+  LOAD_FAVORITES: 'loadFavorites',
   ADD_COMMENT: 'addComment',
   ADD_RATING: 'addRating',
   CHANGE_COMMENT_SENDING_STATUS: 'changeCommentSendingStatus',
+  ADD_FAVORITE_OFFER: 'addFavoriteOffer',
+  TOGGLE_IS_COMMENT_SEND: 'toggleIsCommentSend',
 };
 
-export const ActionCreator = {
-  changeCity: (city) => ({
-    type: ActionType.CHANGE_CITY,
-    payload: city,
-  }),
-  changeSort: (sort) => ({
-    type: ActionType.CHANGE_SORT,
-    payload: sort,
-  }),
-  selectOffer: (offer) => ({
-    type: ActionType.SELECT_OFFER,
-    payload: offer,
-  }),
-  unselectOffer: () => ({
-    type: ActionType.UNSELECT_OFFER,
-    payload: null,
-  }),
-  toggleSort: (bool) => ({
-    type: ActionType.TOGGLE_SORT,
-    payload: !bool,
-  }),
-  loadOffers: (offers) => ({
-    type: ActionType.LOAD_OFFERS,
-    payload: offers,
-  }),
-  loadOffer: (offer) => ({
-    type: ActionType.LOAD_OFFER,
-    payload: offer,
-  }),
-  loadNearby: (offers) => ({
-    type: ActionType.LOAD_NEARBY,
-    payload: offers,
-  }),
-  loadComments: (comments) => ({
-    type: ActionType.LOAD_COMMENTS,
-    payload: comments,
-  }),
-  addComment: (comment) => ({
-    type: ActionType.ADD_COMMENT,
-    payload: comment,
-  }),
-  addRating: (rating) => ({
-    type: ActionType.ADD_RATING,
-    payload: rating,
-  }),
-  requireAuthorization: (status) => ({
-    type: ActionType.REQUIRE_AUTHORIZATION,
-    payload: status,
-  }),
-  changeOffersLoadingStatus: (status) => ({
-    type: ActionType.CHANGE_OFFERS_LOADING_STATUS,
-    payload: !status,
-  }),
-  changeOfferLoadingStatus: (status) => ({
-    type: ActionType.CHANGE_OFFER_LOADING_STATUS,
-    payload: !status,
-  }),
-  changeCommentSendingStatus: (status) => ({
-    type: ActionType.CHANGE_COMMENT_SENDING_STATUS,
-    payload: status,
-  }),
-  saveLogin: (login) => ({
-    type: ActionType.SAVE_LOGIN,
-    payload: login,
-  }),
-  logout: () => ({
-    type: ActionType.LOGOUT,
-  }),
-  removeLogin: () => ({
-    type: ActionType.REMOVE_LOGIN,
-    payload: '',
-  }),
-  redirect: (url) => ({
-    type: ActionType.REDIRECT,
-    payload: url,
-  }),
-};
+export const changeCity = createAction(ActionType.CHANGE_CITY, (city) => ({
+  payload: city,
+}));
 
+export const changeSort = createAction(ActionType.CHANGE_SORT, (sort) => ({
+  payload: sort,
+}));
+
+export const selectOffer = createAction(ActionType.SELECT_OFFER, (offer) => ({
+  payload: offer,
+}));
+
+export const unselectOffer = createAction(ActionType.UNSELECT_OFFER, (offer) => ({
+  payload: offer,
+}));
+
+export const toggleSort = createAction(ActionType.TOGGLE_SORT, (bool) => ({
+  payload: !bool,
+}));
+
+export const loadOffers = createAction(ActionType.LOAD_OFFERS, (offers) => ({
+  payload: offers,
+}));
+
+export const loadOffer = createAction(ActionType.LOAD_OFFER, (offer) => ({
+  payload: offer,
+}));
+
+export const loadNearby = createAction(ActionType.LOAD_NEARBY, (offers) => ({
+  payload: offers,
+}));
+
+export const loadFavorites = createAction(ActionType.LOAD_FAVORITES, (offers) => ({
+  payload: offers,
+}));
+
+export const addFavoriteOffer = createAction(ActionType.ADD_FAVORITE_OFFER, (offer) => ({
+  payload: offer,
+}));
+
+export const loadComments = createAction(ActionType.LOAD_COMMENTS, (comments) => ({
+  payload: comments,
+}));
+
+export const addComment = createAction(ActionType.ADD_COMMENT, (comment) => ({
+  payload: comment,
+}));
+
+export const addRating = createAction(ActionType.ADD_RATING, (rating) => ({
+  payload: rating,
+}));
+
+export const requireAuthorization = createAction(ActionType.REQUIRE_AUTHORIZATION, (status) => ({
+  payload: status,
+}));
+
+export const changeOffersLoadingStatus = createAction(ActionType.CHANGE_OFFERS_LOADING_STATUS, (status) => ({
+  payload: status,
+}));
+
+export const changeOfferLoadingStatus = createAction(ActionType.CHANGE_OFFER_LOADING_STATUS, (status) => ({
+  payload: status,
+}));
+
+export const changeCommentSendingStatus = createAction(ActionType.CHANGE_COMMENT_SENDING_STATUS, (status) => ({
+  payload: status,
+}));
+
+export const saveLogin = createAction(ActionType.SAVE_LOGIN, (login) => ({
+  payload: login,
+}));
+
+export const logout = createAction(ActionType.LOGOUT);
+
+export const removeLogin = createAction(ActionType.REMOVE_LOGIN, () => ({
+  payload: '',
+}));
+
+export const redirect = createAction(ActionType.REDIRECT, (url) => ({
+  payload: url,
+}));
+
+export const chooseOffer = createAction(ActionType.CHOOSE_OFFER, (offer) => ({
+  payload: offer,
+}));

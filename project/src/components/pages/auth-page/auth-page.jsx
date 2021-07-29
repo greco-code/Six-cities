@@ -1,15 +1,18 @@
 import React, {useRef} from 'react';
 import Header from '../../header/header';
-import {connect} from 'react-redux';
-import PropTypes from 'prop-types';
+import {useDispatch} from 'react-redux';
 import {login} from '../../../store/api-actions';
-import {ActionCreator} from '../../../store/action';
+import {saveLogin} from '../../../store/action';
 
-function AuthPage(props) {
-  const {submitLogin} = props;
-
+function AuthPage() {
+  const dispatch = useDispatch();
   const emailRef = useRef();
   const passwordRef = useRef();
+
+  const submitLogin = (authData) => {
+    dispatch(login(authData));
+    dispatch(saveLogin(authData.login));
+  };
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -70,17 +73,4 @@ function AuthPage(props) {
   );
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  submitLogin(authData) {
-    dispatch(login(authData));
-    dispatch(ActionCreator.saveLogin(authData.login));
-  },
-});
-
-AuthPage.propTypes = {
-  submitLogin: PropTypes.func.isRequired,
-};
-
-
-export {AuthPage};
-export default connect(null, mapDispatchToProps)(AuthPage);
+export default AuthPage;

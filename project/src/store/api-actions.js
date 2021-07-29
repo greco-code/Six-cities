@@ -1,39 +1,67 @@
 import {APIRoute, AppRoute, AuthorizationStatus} from '../const';
-import {ActionCreator} from './action';
+import {
+  addFavoriteOffer,
+  changeCommentSendingStatus,
+  changeOfferLoadingStatus,
+  changeOffersLoadingStatus,
+  loadComments,
+  loadFavorites,
+  loadNearby,
+  loadOffer,
+  loadOffers,
+  redirect,
+  requireAuthorization,
+  saveLogin
+} from './action';
 import {adaptCommentToClient, adaptOfferToClient} from '../adapters';
 
 export const fetchOffers = () => (dispatch, _getState, api) => (
   api.get(APIRoute.OFFERS)
-    .then(({data}) => dispatch(ActionCreator.loadOffers(data.map((offer) => adaptOfferToClient(offer)))))
-    .then(() => dispatch(ActionCreator.changeOffersLoadingStatus()))
+    .then(({data}) => dispatch(loadOffers(data.map((offer) => adaptOfferToClient(offer)))))
+    .then(() => dispatch(changeOffersLoadingStatus(true)))
 );
 
 export const fetchOffer = (id) => (dispatch, _getState, api) => (
   api.get(`${APIRoute.OFFERS}/${id}`)
-    .then(({data}) => dispatch(ActionCreator.loadOffer(adaptOfferToClient(data))))
-    .then(() => dispatch(ActionCreator.changeOfferLoadingStatus()))
-  // .catch(() => dispatch(ActionCreator.redirect(AppRoute.ERROR)))
+    .then(({data}) => {
+      dispatch(loadOffer(adaptOfferToClient(data)));
+      // dispatch(selectOffer(data));
+    })
+    .then(() => dispatch(changeOfferLoadingStatus(true)))
+    .catch(() => dispatch(redirect(AppRoute.ERROR)))
 );
 
 export const fetchComments = (id) => (dispatch, _getState, api) => (
   api.get(`${APIRoute.COMMENTS}/${id}`)
-    .then(({data}) => dispatch(ActionCreator.loadComments(data.map((comment) => adaptCommentToClient(comment)))))
+    .then(({data}) => dispatch(loadComments(data.map((comment) => adaptCommentToClient(comment)))))
 );
 
 export const fetchNearby = (id) => (dispatch, _getState, api) => (
   api.get(`${APIRoute.OFFERS}/${id}/nearby`)
-    .then(({data}) => dispatch(ActionCreator.loadNearby(data.map((offer) => adaptOfferToClient(offer)))))
+    .then(({data}) => dispatch(loadNearby(data.map((offer) => adaptOfferToClient(offer)))))
+);
+
+export const fetchFavorites = () => (dispatch, _getState, api) => (
+  api.get(APIRoute.FAVORITE)
+    .then(({data}) => dispatch(loadFavorites(data.map((offer) => adaptOfferToClient(offer)))))
 );
 
 export const postComment = (id, comment) => (dispatch, _getState, api) => (
   api.post(`${APIRoute.COMMENTS}/${id}`, comment)
-    .then(() => dispatch(ActionCreator.changeCommentSendingStatus(true)))
+    .then(({data}) => dispatch(loadComments(data.map((item) => adaptCommentToClient(item)))))
+    .then(() => dispatch(changeCommentSendingStatus(false)))
+    .then(() => dispatch(changeCommentSendingStatus(true)))
+);
+
+export const addToFavorites = (id, status) => (dispatch, _getState, api) => (
+  api.post(`${APIRoute.FAVORITE}/${id}/${status}`)
+    .then(({data}) => dispatch(addFavoriteOffer(adaptOfferToClient(data))))
 );
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(APIRoute.LOGIN)
-    .then(({data}) => dispatch(ActionCreator.saveLogin(data.email)))
-    .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
+    .then(({data}) => dispatch(saveLogin(data.email)))
+    .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
     .catch(() => {
     })
 );
@@ -41,12 +69,12 @@ export const checkAuth = () => (dispatch, _getState, api) => (
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (
   api.post(APIRoute.LOGIN, {email, password})
     .then(({data}) => localStorage.setItem('token', data.token))
-    .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
-    .then(() => dispatch(ActionCreator.redirect(AppRoute.MAIN)))
+    .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
+    .then(() => dispatch(redirect(AppRoute.MAIN)))
 );
 
 export const logout = () => (dispatch, _getState, api) => (
   api.delete(APIRoute.LOGOUT)
     .then(() => localStorage.removeItem('token'))
-    .then(() => dispatch(ActionCreator.logout()))
+    .then(() => dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH)))
 );

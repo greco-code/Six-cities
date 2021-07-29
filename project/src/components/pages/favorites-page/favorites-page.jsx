@@ -1,41 +1,36 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Header from '../../header/header';
 import Footer from '../../footer/footer';
-import PropTypes from 'prop-types';
-import offerProp from '../../../props/offer.prop';
-import FavoriteCitiesList from '../../favorite-cities-list/favorite-cities-list';
-import {PointTypeSettings} from '../../../settings';
-import {connect} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {getFavoriteOffers} from '../../../store/data-reducer/selectors';
+import {fetchFavorites} from '../../../store/api-actions';
+import Favorites from '../../favorites/favorites';
+import FavoritesEmpty from '../../favorites-empty/favorites-empty';
+import {BookmarkButtonSettings} from '../../../settings';
 
 
-function FavoritesPage(props) {
-  const {favoriteOffers} = props;
+function FavoritesPage() {
+  const favoriteOffers = useSelector(getFavoriteOffers);
+  // console.log(typeof favoriteOffers);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchFavorites());
+  }, [favoriteOffers]);
+
   const cities = [...new Set(favoriteOffers.map((offer) => offer.city.name))];
 
   return (
     <div className="page">
       <Header/>
-      <main className="page__main page__main--favorites">
-        <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <FavoriteCitiesList offers={favoriteOffers} cities={cities} type={PointTypeSettings.FAVORITES}/>
-          </section>
-        </div>
-      </main>
+      {
+        favoriteOffers.length
+          ? <Favorites favoriteOffers={favoriteOffers} cities={cities} bookmarkSettings={BookmarkButtonSettings.FAVORITES}/>
+          : <FavoritesEmpty/>
+      }
       <Footer/>
     </div>
   );
 }
 
-FavoritesPage.propTypes = {
-  favoriteOffers: PropTypes.arrayOf(offerProp).isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  favoriteOffers: state.offers.filter((offer) => offer.isFavorite),
-});
-
-
-export {FavoritesPage};
-export default connect(mapStateToProps)(FavoritesPage);
+export default FavoritesPage;

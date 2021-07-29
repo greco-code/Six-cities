@@ -1,12 +1,12 @@
 import React from 'react';
 import {AuthorizationStatus} from '../../const';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import {useSelector} from 'react-redux';
 import SignoutLink from '../singout-link/signout-link';
 import SinginLink from '../signin-link/singin-link';
+import {getAuthStatus} from '../../store/login-reducer/selectors';
 
-function AuthLinks(props) {
-  const {authorizationStatus} = props;
+function AuthLinks() {
+  const authorizationStatus = useSelector(getAuthStatus);
   const isAuthorized = authorizationStatus === AuthorizationStatus.AUTH;
 
   return (
@@ -17,13 +17,4 @@ function AuthLinks(props) {
   );
 }
 
-AuthLinks.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  authorizationStatus: state.authorizationStatus,
-});
-
-export {AuthLinks};
-export default connect(mapStateToProps)(AuthLinks);
+export default AuthLinks;

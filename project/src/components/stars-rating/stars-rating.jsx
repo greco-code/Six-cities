@@ -10,6 +10,7 @@ function StarsRating(props) {
     <div className="reviews__rating-form form__rating">
       {
         new Array(STARS_AMOUNT).fill().map((value, index) => (
+          //todo убрать индекс
           // eslint-disable-next-line react/no-array-index-key
           <React.Fragment key={index}>
             <input
@@ -19,7 +20,7 @@ function StarsRating(props) {
               id={`${index + 1}-stars`}
               type="radio"
               onChange={(evt) => setRating(Number(evt.target.value))}
-              checked={rating === value}
+              checked={rating === STARS_AMOUNT - index}
             />
             <label htmlFor={`${index + 1}-stars`} className="reviews__rating-label form__rating-label" title="good">
               <svg className="form__star-image" width="37" height="33">

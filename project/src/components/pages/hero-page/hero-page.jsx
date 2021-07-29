@@ -1,23 +1,28 @@
 import React, {useEffect} from 'react';
-import PropTypes from 'prop-types';
 import PointsList from '../../points-list/points-list';
 import Header from '../../header/header';
-import offerProp from '../../../props/offer.prop';
-import {PointTypeSettings} from '../../../settings';
+import {BookmarkButtonSettings, PointTypeSettings} from '../../../settings';
 import Map from '../../map/map';
 import CitiesList from '../../citiesList/citiesList';
 import {CITIES} from '../../../const';
-import {connect, useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {getOffersList, isPlural} from '../../../utils';
 import HeroEmptyPage from '../hero-empty-page/hero-empty-page';
 import SortForm from '../../sort-form/sort-form';
 import {sort} from '../../../sort';
 import {fetchOffers} from '../../../store/api-actions';
 import LoadWrapper from '../../load-wrapper/load-wrapper';
+import {getOffers, getOffersLoadingStatus} from '../../../store/data-reducer/selectors';
+import {getCity, getHoveredOffer, getSortType} from '../../../store/interface-reducer/selectors';
 
 
-function HeroPage(props) {
-  const {offers, city, currentSortType, hoveredOffer, isOffersLoaded} = props;
+function HeroPage() {
+  const offers = useSelector(getOffers);
+  const city = useSelector(getCity);
+  const currentSortType = useSelector(getSortType);
+  const hoveredOffer = useSelector(getHoveredOffer);
+  const isOffersLoaded = useSelector(getOffersLoadingStatus);
+
   const offersByCity = offers && getOffersList(offers, city);
   const sortedOffers = offersByCity && sort(currentSortType, offersByCity);
 
@@ -52,7 +57,8 @@ function HeroPage(props) {
                 <LoadWrapper isDataLoaded={isOffersLoaded}>
                   <PointsList
                     offers={sortedOffers}
-                    type={PointTypeSettings.MAIN}
+                    pointSettings={PointTypeSettings.MAIN}
+                    bookmarkSettings={BookmarkButtonSettings.MAIN}
                   />
                 </LoadWrapper>
               </div>
@@ -71,23 +77,4 @@ function HeroPage(props) {
   );
 }
 
-
-HeroPage.propTypes = {
-  offers: PropTypes.arrayOf(offerProp).isRequired,
-  city: PropTypes.string.isRequired,
-  currentSortType: PropTypes.string.isRequired,
-  hoveredOffer: offerProp,
-  isOffersLoaded: PropTypes.bool.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  city: state.city,
-  offers: state.offers,
-  currentSortType: state.sortType,
-  hoveredOffer: state.hoveredOffer,
-  isOffersLoaded: state.isOffersLoaded,
-});
-
-
-export {HeroPage};
-export default connect(mapStateToProps)(HeroPage);
+export default HeroPage;

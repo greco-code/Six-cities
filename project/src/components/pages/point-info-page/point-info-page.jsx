@@ -1,8 +1,5 @@
 import React, {useEffect} from 'react';
 import Header from '../../header/header';
-import PropTypes from 'prop-types';
-import offerProp from '../../../props/offer.prop';
-import commentProp from '../../../props/comment.prop';
 import ReviewForm from '../../review-form/review-form';
 import OfferImages from '../../offer-images/offer-images';
 import PremiumLabel from '../../premium-label/premium-label';
@@ -11,19 +8,44 @@ import ProLabel from '../../pro-label/pro-label';
 import GoodsList from '../../goods-list/goods-list';
 import {AuthorizationStatus, CONVERT_TO_RATING} from '../../../const';
 import Map from '../../map/map';
-import {connect, useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import LoadWrapper from '../../load-wrapper/load-wrapper';
 import {fetchComments, fetchNearby, fetchOffer} from '../../../store/api-actions';
 import {useParams} from 'react-router-dom';
 import NearbyPoints from '../../nearby-points/nearby-points';
+import {getComments, getNearbyOffers, getOffer, getOfferLoadingStatus} from '../../../store/data-reducer/selectors';
+import {getCity} from '../../../store/interface-reducer/selectors';
+import {getAuthStatus} from '../../../store/login-reducer/selectors';
+import BookmarkButton from '../../bookmark-button/bookmark-button';
+import {BookmarkButtonSettings} from '../../../settings';
 
-function PointInfoPage(props) {
-  const {offer, comments, nearbyOffers, city, isOfferLoaded, authorizationStatus} = props;
-  const {images, isFavorite, isPremium, rating, title, type, description, bedrooms, maxAdults, price, goods, host} = offer;
-
+function PointInfoPage() {
+  const offer = useSelector(getOffer);
+  const comments = useSelector(getComments);
+  const nearbyOffers = useSelector(getNearbyOffers);
+  const city = useSelector(getCity);
+  const isOfferLoaded = useSelector(getOfferLoadingStatus);
+  const authorizationStatus = useSelector(getAuthStatus);
 
   const dispatch = useDispatch();
   const params = useParams();
+
+  const {
+    images,
+    isFavorite,
+    id,
+    isPremium,
+    rating,
+    title,
+    type,
+    description,
+    bedrooms,
+    maxAdults,
+    price,
+    goods,
+    host,
+  } = offer;
+
 
   useEffect(() => {
     dispatch(fetchOffer(params.id));
@@ -51,12 +73,7 @@ function PointInfoPage(props) {
                   <h1 className="property__name">
                     {title}
                   </h1>
-                  <button className={`property__bookmark-button button ${isFavorite && 'property__bookmark-button--active'}`} type="button">
-                    <svg className="property__bookmark-icon" width="31" height="33">
-                      <use xlinkHref="#icon-bookmark"/>
-                    </svg>
-                    <span className="visually-hidden">To bookmarks</span>
-                  </button>
+                  <BookmarkButton isFavorite={isFavorite} bookmarkSettings={BookmarkButtonSettings.POINT_INFO} id={id}/>
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">
@@ -108,9 +125,8 @@ function PointInfoPage(props) {
                     id={params.id}
                   />
                   {
-                    authorizationStatus === AuthorizationStatus.AUTH
-                      ? <ReviewForm id={params.id}/>
-                      : ''
+                    authorizationStatus === AuthorizationStatus.AUTH &&
+                    <ReviewForm id={params.id}/>
                   }
                 </section>
               </div>
@@ -130,23 +146,4 @@ function PointInfoPage(props) {
   );
 }
 
-PointInfoPage.propTypes = {
-  offer: offerProp,
-  comments: PropTypes.arrayOf(commentProp).isRequired,
-  nearbyOffers: PropTypes.arrayOf(offerProp).isRequired,
-  isOfferLoaded: PropTypes.bool.isRequired,
-  city: PropTypes.string.isRequired,
-  authorizationStatus: PropTypes.string.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  offer: state.selectedOffer,
-  comments: state.comments,
-  nearbyOffers: state.nearbyOffers,
-  isOfferLoaded: state.isOfferLoaded,
-  city: state.city,
-  authorizationStatus: state.authorizationStatus,
-});
-
-export {PointInfoPage};
-export default connect(mapStateToProps)(PointInfoPage);
+export default PointInfoPage;
