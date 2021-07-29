@@ -1,4 +1,4 @@
-import {APIRoute, AppRoute, AuthorizationStatus} from '../const';
+import {APIRoute, AppRoute, AuthorizationStatus, COMMENT_SENDING_STATUS} from '../const';
 import {
   addFavoriteOffer,
   changeCommentSendingStatus,
@@ -49,8 +49,8 @@ export const fetchFavorites = () => (dispatch, _getState, api) => (
 export const postComment = (id, comment) => (dispatch, _getState, api) => (
   api.post(`${APIRoute.COMMENTS}/${id}`, comment)
     .then(({data}) => dispatch(loadComments(data.map((item) => adaptCommentToClient(item)))))
-    .then(() => dispatch(changeCommentSendingStatus(false)))
-    .then(() => dispatch(changeCommentSendingStatus(true)))
+    .then(() => dispatch(changeCommentSendingStatus(COMMENT_SENDING_STATUS.SENT)))
+    .catch(() => dispatch(changeCommentSendingStatus(COMMENT_SENDING_STATUS.ERROR)))
 );
 
 export const addToFavorites = (id, status) => (dispatch, _getState, api) => (

@@ -4,6 +4,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {postComment} from '../../store/api-actions';
 import PropTypes from 'prop-types';
 import {getCommentSendingStatus} from '../../store/data-reducer/selectors';
+import {changeCommentSendingStatus} from '../../store/action';
+import {COMMENT_SENDING_STATUS} from '../../const';
 
 const MINIMUM_COMMENT_LENGTH = 50;
 
@@ -12,7 +14,7 @@ function ReviewForm(props) {
   const {id} = props;
 
   const dispatch = useDispatch();
-  const isCommentSend = useSelector(getCommentSendingStatus);
+  const commentSendingStatus = useSelector(getCommentSendingStatus);
 
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
@@ -21,6 +23,8 @@ function ReviewForm(props) {
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
+    dispatch(changeCommentSendingStatus(COMMENT_SENDING_STATUS.NOT_SENT));
+
     dispatch(postComment(id, {
       comment,
       rating,
@@ -28,11 +32,11 @@ function ReviewForm(props) {
   };
 
   useEffect(() => {
-    if (isCommentSend) {
+    if (commentSendingStatus === COMMENT_SENDING_STATUS.SENT) {
       setComment('');
       setRating(0);
     }
-  }, [isCommentSend]);
+  }, [commentSendingStatus]);
 
   return (
     <form
@@ -60,6 +64,13 @@ function ReviewForm(props) {
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least
           <b className="reviews__text-amount"> 50 characters
           </b>.
+          {commentSendingStatus === COMMENT_SENDING_STATUS.ERROR &&
+          (
+            <React.Fragment>
+              <br/>
+              <span className="reviews__help" style={{color: 'red'}}>Comment not sent. Please try again.</span>
+            </React.Fragment>
+          )}
         </p>
         <button
           className="reviews__submit form__submit button"

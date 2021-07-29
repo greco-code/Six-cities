@@ -22,7 +22,7 @@ export const ActionType = {
   ADD_RATING: 'addRating',
   CHANGE_COMMENT_SENDING_STATUS: 'changeCommentSendingStatus',
   ADD_FAVORITE_OFFER: 'addFavoriteOffer',
-  TOGGLE_IS_COMMENT_SEND: 'toggleIsCommentSend',
+  TOGGLE_COMMENT_SENDING_STATUS: 'toggleCommentSendingStatus',
 };
 
 export const changeCity = createAction(ActionType.CHANGE_CITY, (city) => ({
@@ -105,8 +105,4 @@ export const removeLogin = createAction(ActionType.REMOVE_LOGIN, () => ({
 
 export const redirect = createAction(ActionType.REDIRECT, (url) => ({
   payload: url,
-}));
-
-export const chooseOffer = createAction(ActionType.CHOOSE_OFFER, (offer) => ({
-  payload: offer,
 }));

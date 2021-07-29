@@ -107,3 +107,9 @@ export const RATING_OPTIONS = [
     title: 'terrible',
   },
 ];
+
+export const COMMENT_SENDING_STATUS = {
+  SENT: 'sent',
+  NOT_SENT: 'notSent',
+  ERROR: 'error',
+};

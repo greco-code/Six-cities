@@ -11,6 +11,7 @@ import {
   loadOffers
 } from '../action';
 import {defaultOffer} from '../../utils';
+import {COMMENT_SENDING_STATUS} from '../../const';
 
 const initialState = {
   offers: [],
@@ -20,7 +21,7 @@ const initialState = {
   favoriteOffers: [],
   isOffersLoaded: false,
   isOfferLoaded: false,
-  isCommentSend: false,
+  commentSendingStatus: COMMENT_SENDING_STATUS.NOT_SENT,
 };
 
 export const ITEMS_TO_REMOVE = 1;
@@ -68,7 +69,7 @@ const dataReducer = createReducer(initialState, (builder) => {
       state.isOfferLoaded = action.payload;
     })
     .addCase(changeCommentSendingStatus, (state, action) => {
-      state.isCommentSend = action.payload;
+      state.commentSendingStatus = action.payload;
     });
 });
 
