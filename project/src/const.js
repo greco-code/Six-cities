@@ -113,3 +113,21 @@ export const COMMENT_SENDING_STATUS = {
   NOT_SENT: 'notSent',
   ERROR: 'error',
 };
+
+export const OFFERS_LOADING_STATUS = {
+  LOADED: 'loaded',
+  NOT_LOADED: 'notLoaded',
+  ERROR: 'error',
+};
+
+export const OFFER_LOADING_STATUS = {
+  LOADED: 'loaded',
+  NOT_LOADED: 'notLoaded',
+  ERROR: 'error',
+};
+
+export const FAVORITES_LOADING_STATUS = {
+  LOADED: 'loaded',
+  NOT_LOADED: 'notLoaded',
+  ERROR: 'error',
+};

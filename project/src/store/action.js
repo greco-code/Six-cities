@@ -23,6 +23,7 @@ export const ActionType = {
   CHANGE_COMMENT_SENDING_STATUS: 'changeCommentSendingStatus',
   ADD_FAVORITE_OFFER: 'addFavoriteOffer',
   TOGGLE_COMMENT_SENDING_STATUS: 'toggleCommentSendingStatus',
+  CHANGE_FAVORITES_LOADING_STATUS: 'changeFavoritesLoadingStatus',
 };
 
 export const changeCity = createAction(ActionType.CHANGE_CITY, (city) => ({
@@ -105,4 +106,8 @@ export const removeLogin = createAction(ActionType.REMOVE_LOGIN, () => ({
 
 export const redirect = createAction(ActionType.REDIRECT, (url) => ({
   payload: url,
+}));
+
+export const changeFavoritesLoadingStatus = createAction(ActionType.CHANGE_FAVORITES_LOADING_STATUS, (status) => ({
+  payload: status,
 }));

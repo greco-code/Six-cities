@@ -1,7 +1,8 @@
-import {APIRoute, AppRoute, AuthorizationStatus, COMMENT_SENDING_STATUS} from '../const';
+import {APIRoute, AppRoute, AuthorizationStatus, COMMENT_SENDING_STATUS, FAVORITES_LOADING_STATUS, OFFER_LOADING_STATUS, OFFERS_LOADING_STATUS} from '../const';
 import {
   addFavoriteOffer,
   changeCommentSendingStatus,
+  changeFavoritesLoadingStatus,
   changeOfferLoadingStatus,
   changeOffersLoadingStatus,
   loadComments,
@@ -18,17 +19,18 @@ import {adaptCommentToClient, adaptOfferToClient} from '../adapters';
 export const fetchOffers = () => (dispatch, _getState, api) => (
   api.get(APIRoute.OFFERS)
     .then(({data}) => dispatch(loadOffers(data.map((offer) => adaptOfferToClient(offer)))))
-    .then(() => dispatch(changeOffersLoadingStatus(true)))
+    .then(() => dispatch(changeOffersLoadingStatus(OFFERS_LOADING_STATUS.LOADED)))
+    .catch(() => dispatch(changeOffersLoadingStatus(OFFERS_LOADING_STATUS.ERROR)))
 );
 
 export const fetchOffer = (id) => (dispatch, _getState, api) => (
   api.get(`${APIRoute.OFFERS}/${id}`)
-    .then(({data}) => {
-      dispatch(loadOffer(adaptOfferToClient(data)));
-      // dispatch(selectOffer(data));
+    .then(({data}) => dispatch(loadOffer(adaptOfferToClient(data))))
+    .then(() => dispatch(changeOfferLoadingStatus(OFFER_LOADING_STATUS.LOADED)))
+    .catch(() => {
+      dispatch(redirect(AppRoute.ERROR));
+      dispatch(changeOfferLoadingStatus(OFFER_LOADING_STATUS.ERROR));
     })
-    .then(() => dispatch(changeOfferLoadingStatus(true)))
-    .catch(() => dispatch(redirect(AppRoute.ERROR)))
 );
 
 export const fetchComments = (id) => (dispatch, _getState, api) => (
@@ -44,6 +46,8 @@ export const fetchNearby = (id) => (dispatch, _getState, api) => (
 export const fetchFavorites = () => (dispatch, _getState, api) => (
   api.get(APIRoute.FAVORITE)
     .then(({data}) => dispatch(loadFavorites(data.map((offer) => adaptOfferToClient(offer)))))
+    .then(() => dispatch(changeFavoritesLoadingStatus(FAVORITES_LOADING_STATUS.LOADED)))
+    .catch(() => dispatch(changeFavoritesLoadingStatus(FAVORITES_LOADING_STATUS.ERROR)))
 );
 
 export const postComment = (id, comment) => (dispatch, _getState, api) => (
