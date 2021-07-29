@@ -61,7 +61,7 @@ function PointInfoPage() {
           <section className="property">
             {
               images &&
-              <OfferImages images={images}/>
+              <OfferImages images={images.slice(0, 6)}/>
             }
             <div className="property__container container">
               <div className="property__wrapper">
