@@ -1,5 +1,3 @@
-import {AuthorizationStatus} from './const';
-
 export const getOffersList = (offers, city) => offers.filter((offer) => offer.city.name === city);
 
 export const isPlural = (amount, word, suffix = 's') => {
@@ -9,8 +7,6 @@ export const isPlural = (amount, word, suffix = 's') => {
     return word;
   }
 };
-
-export const isCheckedAuth = (authorizationStatus) => authorizationStatus === AuthorizationStatus.UNKNOWN;
 
 export const defaultOffer = {
   bedrooms: null,

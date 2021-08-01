@@ -12,10 +12,6 @@ export const LogoSettings = {
   },
 };
 
-export const ListSettings = {
-  POINTS_AMOUNT: 4,
-};
-
 export const PointTypeSettings = {
   MAIN: {
     articleClass: 'cities__place-card place-card',
