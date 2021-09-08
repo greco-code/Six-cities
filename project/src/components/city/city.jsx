@@ -3,6 +3,7 @@ import {useDispatch} from 'react-redux';
 import {changeCity} from '../../store/action';
 import PropTypes from 'prop-types';
 import cityProp from '../../props/city.prop';
+import {Link} from 'react-router-dom';
 
 
 function City(props) {
@@ -16,9 +17,9 @@ function City(props) {
 
   return (
     <li className="locations__item" onClick={(evt) => onCityChange(evt.target.textContent)}>
-      <a className={currentCity === city.city ? 'locations__item-link tabs__item tabs__item--active' : 'locations__item-link tabs__item'} href="#">
+      <Link className={currentCity === city.city ? 'locations__item-link tabs__item tabs__item--active' : 'locations__item-link tabs__item'}>
         <span>{city.city}</span>
-      </a>
+      </Link>
     </li>
   );
 }

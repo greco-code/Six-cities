@@ -20,6 +20,7 @@ function FavoritesPage() {
   useEffect(() => {
     dispatch(changeFavoritesLoadingStatus(FAVORITES_LOADING_STATUS.NOT_LOADED));
     dispatch(fetchFavorites());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [favoriteOffers]);
 
   const cities = [...new Set(favoriteOffers.map((offer) => offer.city.name))];

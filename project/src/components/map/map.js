@@ -53,7 +53,7 @@ function Map(props) {
     return () => {
       markers.clearLayers();
     };
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [map, offers, currentOffer]);
 
   return (

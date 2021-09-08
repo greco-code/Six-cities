@@ -4,6 +4,7 @@ import offerProp from '../../props/offer.prop';
 import pointTypeProp from '../../props/pointSettings.prop';
 import FavoriteItemsList from '../favorite-items-list/favorite-items-list';
 import bookmarkSettingsProp from '../../props/bookmarkSettings.prop';
+import {Link} from 'react-router-dom';
 
 function FavoritesCity(props) {
   const {city, favoriteOffers, pointSettings, bookmarkSettings} = props;
@@ -12,9 +13,9 @@ function FavoritesCity(props) {
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
         <div className="locations__item">
-          <a className="locations__item-link" href="#">
+          <Link className="locations__item-link">
             <span>{city}</span>
-          </a>
+          </Link>
         </div>
       </div>
       <FavoriteItemsList offers={favoriteOffers} pointSettings={pointSettings} bookmarkSettings={bookmarkSettings}/>

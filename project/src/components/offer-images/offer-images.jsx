@@ -8,7 +8,7 @@ function OfferImages(props) {
       <div className="property__gallery">
         {images.map((image, index) => (
           <div key={`${index + image}`} className="property__image-wrapper">
-            <img className="property__image" src={image} alt="Photo studio"/>
+            <img className="property__image" src={image} alt="Studio"/>
           </div>
         ))}
       </div>

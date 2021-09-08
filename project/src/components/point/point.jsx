@@ -35,7 +35,7 @@ function Point(props) {
       )}
       <div className={pointSettings.imageContainerClass}>
         <Link to={{pathname: generatePath(AppRoute.ROOM, {id})}}>
-          <img className="place-card__image" src={previewImage} width={pointSettings.imageWidth} height={pointSettings.imageHeight} alt="Place image"/>
+          <img className="place-card__image" src={previewImage} width={pointSettings.imageWidth} height={pointSettings.imageHeight} alt="Place"/>
         </Link>
       </div>
       <div className={pointSettings.infoContainerClass}>
