@@ -1,49 +1,46 @@
-# Личный проект «Шесть городов»
+# Project «Big Trip»
 
-* Студент: [Георгий Найфонов](https://up.htmlacademy.ru/react/7/user/1035371).
-* Наставник: [Виктор Кан](https://htmlacademy.ru/profile/viktorkan).
+* Student: [George Nayfonov](https://github.com/greco-code).
+* Mentor: [Viktor Kan](https://github.com/htmlviktor).
+* Build: [Click here]()
 
----
+### About:
 
-_Не удаляйте и не изменяйте папки и файлы:_
-_`.editorconfig`, `.gitattributes`, `.gitignore`._
+- React App
+- Redux
+- Fetch.API
+- Leaflet.js
+- Webpack
 
----
+### Pages:
 
-### Памятка
+- Main
+- Info-page for every hotel
+- Favorites page
+- Login page
 
-#### 1. Зарегистрируйтесь на Гитхабе
+### You can:
 
-Если у вас ещё нет аккаунта на [github.com](https://github.com/join), скорее зарегистрируйтесь.
+- Choose a city
+- Login/logout
+- Add hotel to favorites
+- Remove hotel from favorites
+- Write a comment
 
-#### 2. Создайте форк
+### Commands
 
-Откройте репозиторий и нажмите кнопку «Fork» в правом верхнем углу. Репозиторий из Академии будет скопирован в ваш аккаунт.
+At first, change directory to /project
 
-<img width="769" alt="Press 'Fork'" src="https://cloud.githubusercontent.com/assets/259739/20264045/a1ddbf40-aa7a-11e6-9a1a-724a1c0123c8.png">
+`npm start`
+Runs dev-server ([http://localhost:8080](http://localhost:8080) by default)
 
-Получится вот так:
+`npm run build`
+Builds project
 
-<img width="769" alt="Forked" src="https://cloud.githubusercontent.com/assets/259739/20264122/f63219a6-aa7a-11e6-945a-89818fc7c014.png">
+<br>
 
-#### 3. Клонируйте репозиторий на свой компьютер
+<a href="https://htmlacademy.ru/intensive/ecmascript"><img align="left" width="50" height="50" title="HTML Academy" src="https://up.htmlacademy.ru/static/img/intensive/ecmascript/logo-for-github.svg"></a>
 
-Будьте внимательны: нужно клонировать свой репозиторий (форк), а не репозиторий Академии. Также обратите внимание, что клонировать репозиторий нужно через SSH, а не через HTTPS. Нажмите зелёную кнопку в правой части экрана, чтобы скопировать SSH-адрес вашего репозитория:
+This repo was created for studying in [HTML Academy](https://htmlacademy.ru/intensive/react)
 
-<img width="769" alt="SSH" src="https://cloud.githubusercontent.com/assets/259739/20264180/42704126-aa7b-11e6-9ab4-73372b812a53.png">
-
-Клонировать репозиторий можно так:
-
-```
-git clone SSH-адрес_вашего_форка
-```
-
-Команда клонирует репозиторий на ваш компьютер и подготовит всё необходимое для старта работы.
-
-#### 4. Начинайте обучение!
-
----
-
-<a href="https://htmlacademy.ru/intensive/react"><img align="left" width="50" height="50" title="HTML Academy" src="https://up.htmlacademy.ru/static/img/intensive/react/logo-for-github.png"></a>
-
-Репозиторий создан для обучения на профессиональном онлайн‑курсе «[React. Разработка сложных клиентских приложений](https://htmlacademy.ru/intensive/react)» от [HTML Academy](https://htmlacademy.ru).
+[check-image]: https://github.com/htmlacademy-ecmascript/1035371-big-trip-14/workflows/Project%20check/badge.svg?branch=master
