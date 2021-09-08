@@ -2,7 +2,7 @@
 
 * Student: [George Nayfonov](https://github.com/greco-code).
 * Mentor: [Viktor Kan](https://github.com/htmlviktor).
-* Build: [Click here]()
+* Build: [Click here](https://six-cities-three.vercel.app)
 
 ### About:
 
